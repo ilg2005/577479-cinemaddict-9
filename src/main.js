@@ -38,6 +38,5 @@ renderElement(topRatedMoviesContainerElement, getFilmCardMarkup(), FILMS_COUNT_T
 renderElement(mostCommentedContainerElement, getFilmCardMarkup(), FILMS_COUNT_TO_RENDER_EXTRA);
 
 renderElement(footerElement, getPopupMarkup());
-const popupElement = document.querySelector(`.film-details`);
-popupElement.style.display = `none`;
-
+/* const popupElement = document.querySelector(`.film-details`);
+popupElement.style.display = `none`;*/
