@@ -7,6 +7,7 @@ import {getFilmCardMarkup} from "./components/card";
 import {getShowMoreBtnMarkup} from "./components/show-more-btn";
 import {getPopupMarkup} from "./components/popup";
 import {getTopRatedFilmsMarkup} from "./components/top-rated";
+import {getMostCommentedFilmsMarkup} from "./components/most-commented";
 
 const renderElement = (element, markup, renderingCount = 1) => {
   for (let i = 1; i <= renderingCount; i++) {
@@ -16,6 +17,7 @@ const renderElement = (element, markup, renderingCount = 1) => {
 
 const headerElement = document.querySelector(`.header`);
 const mainElement = document.querySelector(`.main`);
+const footerElement = document.querySelector(`.footer`);
 
 renderElement(headerElement, getSearchMarkup());
 renderElement(headerElement, getUserProfileMarkup());
@@ -23,15 +25,15 @@ renderElement(mainElement, getMenuMarkup());
 renderElement(mainElement, getSortMarkup());
 renderElement(mainElement, getContentContainerMarkup());
 
-const filmsListElement = mainElement.querySelector(`.films-list`);
+const filmsSectionElement = mainElement.querySelector(`.films`);
+const filmsListElement = filmsSectionElement.querySelector(`.films-list`);
 const filmsListContainerElement = filmsListElement.querySelector(`.films-list__container`);
 const FILMS_COUNT_TO_RENDER = 5;
 
 renderElement(filmsListContainerElement, getFilmCardMarkup(), FILMS_COUNT_TO_RENDER);
 renderElement(filmsListElement, getShowMoreBtnMarkup());
-renderElement(mainElement, getTopRatedFilmsMarkup());
-
-const footerElement = document.querySelector(`.footer`);
+renderElement(filmsSectionElement, getTopRatedFilmsMarkup());
+renderElement(filmsSectionElement, getMostCommentedFilmsMarkup());
 
 renderElement(footerElement, getPopupMarkup());
 const popupElement = document.querySelector(`.film-details`);
