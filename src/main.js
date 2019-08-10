@@ -2,6 +2,7 @@ import {getSearchMarkup} from "./components/search";
 import {getUserProfileMarkup} from "./components/user-profile";
 import {getMenuMarkup} from "./components/menu";
 import {getSortMarkup} from "./components/sort";
+import {getContentContainerMarkup} from "./components/content-container";
 
 
 const renderElement = (element, markup, renderingCount = 1) => {
@@ -17,3 +18,4 @@ renderElement(headerElement, getSearchMarkup());
 renderElement(headerElement, getUserProfileMarkup());
 renderElement(mainElement, getMenuMarkup());
 renderElement(mainElement, getSortMarkup());
+renderElement(mainElement, getContentContainerMarkup());
