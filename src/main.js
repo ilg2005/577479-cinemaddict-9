@@ -5,6 +5,7 @@ import {getSortMarkup} from "./components/sort";
 import {getContentContainerMarkup} from "./components/content-container";
 import {getFilmCardMarkup} from "./components/card";
 import {getShowMoreBtnMarkup} from "./components/show-more-btn";
+import {getPopupMarkup} from "./components/popup";
 
 const renderElement = (element, markup, renderingCount = 1) => {
   for (let i = 1; i <= renderingCount; i++) {
@@ -27,3 +28,10 @@ const FILMS_COUNT_TO_RENDER = 5;
 
 renderElement(filmsListContainerElement, getFilmCardMarkup(), FILMS_COUNT_TO_RENDER);
 renderElement(filmsListElement, getShowMoreBtnMarkup());
+
+const footerElement = document.querySelector(`.footer`);
+
+renderElement(footerElement, getPopupMarkup());
+const popupElement = document.querySelector(`.film-details`);
+// popupElement.style.display = `none`;
+
