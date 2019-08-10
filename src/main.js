@@ -1,5 +1,6 @@
 import {getSearchMarkup} from "./components/search";
 import {getUserProfileMarkup} from "./components/user-profile";
+import {getMenuMarkup} from "./components/menu";
 
 
 const renderElement = (element, markup, renderingCount = 1) => {
@@ -9,6 +10,8 @@ const renderElement = (element, markup, renderingCount = 1) => {
 };
 
 const headerElement = document.querySelector(`.header`);
+const mainElement = document.querySelector(`.main`);
 
 renderElement(headerElement, getSearchMarkup());
 renderElement(headerElement, getUserProfileMarkup());
+renderElement(mainElement, getMenuMarkup());
