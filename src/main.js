@@ -8,7 +8,7 @@ import {getShowMoreBtnMarkup} from "./components/show-more-btn";
 import {getPopupMarkup} from "./components/popup";
 
 const renderElement = (element, markup, renderingCount = 1) => {
-  for (let i = 1; i <= renderingCount; i++) {
+  for (let i = 0; i < renderingCount; i++) {
     element.insertAdjacentHTML(`beforeend`, markup);
   }
 };
