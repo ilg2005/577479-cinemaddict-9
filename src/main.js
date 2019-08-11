@@ -15,7 +15,6 @@ const renderElement = (element, markup, renderingCount = 1) => {
 
 const headerElement = document.querySelector(`.header`);
 const mainElement = document.querySelector(`.main`);
-const footerElement = document.querySelector(`.footer`);
 
 renderElement(headerElement, getSearchMarkup());
 renderElement(headerElement, getUserProfileMarkup());
@@ -37,6 +36,5 @@ renderElement(filmsListElement, getShowMoreBtnMarkup());
 renderElement(topRatedMoviesContainerElement, getFilmCardMarkup(), FILMS_COUNT_TO_RENDER_EXTRA);
 renderElement(mostCommentedContainerElement, getFilmCardMarkup(), FILMS_COUNT_TO_RENDER_EXTRA);
 
-renderElement(footerElement, getPopupMarkup());
-/* const popupElement = document.querySelector(`.film-details`);
-popupElement.style.display = `none`;*/
+renderElement(document.querySelector(`body`), getPopupMarkup());
+
