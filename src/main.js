@@ -1,12 +1,12 @@
-import {FILMS} from "./components/data";
-import {getSearchMarkup} from "./components/search";
-import {getUserProfileMarkup} from "./components/user-profile";
-import {getMenuMarkup} from "./components/menu";
-import {getSortMarkup} from "./components/sort";
-import {getContentContainerMarkup} from "./components/content-container";
-import {getFilmCardMarkup} from "./components/card";
-import {getShowMoreBtnMarkup} from "./components/show-more-btn";
-import {getPopupMarkup} from "./components/popup";
+import {FILMS} from "./components/data.js";
+import {getSearchMarkup} from "./components/search.js";
+import {getUserProfileMarkup} from "./components/user-profile.js";
+import {getMenuMarkup} from "./components/menu.js";
+import {getSortMarkup} from "./components/sort.js";
+import {getContentContainerMarkup} from "./components/content-container.js";
+import {getFilmCardMarkup} from "./components/card.js";
+import {getShowMoreBtnMarkup} from "./components/show-more-btn.js";
+// import {getPopupMarkup} from "./components/popup";
 
 const renderElement = (element, markup, renderingCount = 1) => {
   for (let i = 0; i < renderingCount; i++) {
@@ -30,14 +30,28 @@ const topRatedMoviesContainerElement = filmsSectionElement.querySelector(`.top-r
 const mostCommentedContainerElement = filmsSectionElement.querySelector(`.most-commented`);
 
 // const FILMS_COUNT_TO_RENDER = 5;
-const FILMS_COUNT_TO_RENDER_EXTRA = 2;
 
 for (const film of FILMS) {
   renderElement(allMoviesContainerElement, getFilmCardMarkup(film.title, film.rating, film.year, film.duration, film.genre, film.description, film.comments, film.poster));
 }
 renderElement(filmsListElement, getShowMoreBtnMarkup());
-renderElement(topRatedMoviesContainerElement, getFilmCardMarkup(), FILMS_COUNT_TO_RENDER_EXTRA);
-renderElement(mostCommentedContainerElement, getFilmCardMarkup(), FILMS_COUNT_TO_RENDER_EXTRA);
+
+const sortArrayByPropertyDescending = (array, property) => {
+  array.sort((a, b) => a[property] < b[property] ? 1 : -1);
+};
+
+const EXTRA_COUNT_TO_RENDER = 2;
+
+const renderExtraFilmsByProperty = (element, property, count) => {
+  let [...filmsCopy] = FILMS;
+  sortArrayByPropertyDescending(filmsCopy, property);
+
+  for (const film of filmsCopy.slice(0, count)) {
+    renderElement(element, getFilmCardMarkup(film.title, film.rating, film.year, film.duration, film.genre, film.description, film.comments, film.poster));
+  }
+};
+
+renderExtraFilmsByProperty(topRatedMoviesContainerElement, `rating`, EXTRA_COUNT_TO_RENDER);
+renderExtraFilmsByProperty(mostCommentedContainerElement, `comments`, EXTRA_COUNT_TO_RENDER);
 
 // renderElement(document.querySelector(`body`), getPopupMarkup());
-

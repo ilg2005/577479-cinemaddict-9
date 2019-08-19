@@ -1,5 +1,5 @@
 const CHARS_TO_SHOW = 139;
-const getShortenedDescription = (text) => (text.length > CHARS_TO_SHOW) ? `${text.substr(0, CHARS_TO_SHOW)}...` : text;
+const getShortenedDescription = (text = ``) => (text.length > CHARS_TO_SHOW) ? `${text.substr(0, CHARS_TO_SHOW)}...` : text;
 
 export const getFilmCardMarkup = (title, rating, year, duration, genre, description, comments, poster) => (`
         <article class="film-card">
