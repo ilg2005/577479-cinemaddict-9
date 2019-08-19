@@ -31,7 +31,7 @@ const getSeparateSentences = (text) => {
   return sentences;
 };
 
-const getDescription = (text) => getSeparateSentences(text).slice(0, getRandomInRange(MIN_SENTENCES_COUNT, MAX_SENTENCES_COUNT));
+const getDescription = (text) => getSeparateSentences(text).slice(0, getRandomInRange(MIN_SENTENCES_COUNT, MAX_SENTENCES_COUNT)).join(` `);
 
 const getRating = (min, max) => {
   const ratings = [];
