@@ -1,3 +1,4 @@
+import {FILMS} from "./components/data";
 import {getSearchMarkup} from "./components/search";
 import {getUserProfileMarkup} from "./components/user-profile";
 import {getMenuMarkup} from "./components/menu";
@@ -28,13 +29,15 @@ const allMoviesContainerElement = filmsListElement.querySelector(`.all-movies`);
 const topRatedMoviesContainerElement = filmsSectionElement.querySelector(`.top-rated`);
 const mostCommentedContainerElement = filmsSectionElement.querySelector(`.most-commented`);
 
-const FILMS_COUNT_TO_RENDER = 5;
+// const FILMS_COUNT_TO_RENDER = 5;
 const FILMS_COUNT_TO_RENDER_EXTRA = 2;
 
-renderElement(allMoviesContainerElement, getFilmCardMarkup(), FILMS_COUNT_TO_RENDER);
+for (const film of FILMS) {
+  renderElement(allMoviesContainerElement, getFilmCardMarkup(film.title, film.rating, film.year, film.duration, film.genre, film.description, film.comments, film.poster));
+}
 renderElement(filmsListElement, getShowMoreBtnMarkup());
 renderElement(topRatedMoviesContainerElement, getFilmCardMarkup(), FILMS_COUNT_TO_RENDER_EXTRA);
 renderElement(mostCommentedContainerElement, getFilmCardMarkup(), FILMS_COUNT_TO_RENDER_EXTRA);
 
-renderElement(document.querySelector(`body`), getPopupMarkup());
+// renderElement(document.querySelector(`body`), getPopupMarkup());
 
