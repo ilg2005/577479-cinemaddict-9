@@ -26,9 +26,8 @@ const getRandomElementFromArray = (array) => array[Math.floor(Math.random() * ar
 const getRandomInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 const getSeparateSentences = (text) => {
-  const sentences = text.split(`.`);
-  sentences.map((sentence) => `${sentence}.`);
-  return sentences;
+  let sentences = text.split(`.`);
+  return sentences.map((sentence) => `${sentence}.`);
 };
 
 const getDescription = (text) => getSeparateSentences(text).slice(0, getRandomInRange(MIN_SENTENCES_COUNT, MAX_SENTENCES_COUNT)).join(` `);
