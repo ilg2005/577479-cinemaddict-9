@@ -1,4 +1,5 @@
 import {FILMS} from "./components/data.js";
+import {FILTERS} from "./components/filters-count.js";
 import {getSearchMarkup} from "./components/search.js";
 import {getUserProfileMarkup} from "./components/user-profile.js";
 import {getMenuMarkup} from "./components/menu.js";
@@ -19,7 +20,7 @@ const mainElement = document.querySelector(`.main`);
 
 renderElement(headerElement, getSearchMarkup());
 renderElement(headerElement, getUserProfileMarkup());
-renderElement(mainElement, getMenuMarkup());
+renderElement(mainElement, getMenuMarkup(FILTERS));
 renderElement(mainElement, getSortMarkup());
 renderElement(mainElement, getContentContainerMarkup());
 
@@ -54,4 +55,5 @@ const renderExtraFilmsByProperty = (element, property, count) => {
 renderExtraFilmsByProperty(topRatedMoviesContainerElement, `rating`, EXTRA_COUNT_TO_RENDER);
 renderExtraFilmsByProperty(mostCommentedContainerElement, `comments`, EXTRA_COUNT_TO_RENDER);
 
+renderElement(document.querySelector(`.footer__statistics`), `<p>${FILMS.length} movies inside</p>`);
 // renderElement(document.querySelector(`body`), getPopupMarkup());
