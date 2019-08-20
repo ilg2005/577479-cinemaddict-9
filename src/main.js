@@ -7,7 +7,10 @@ import {getSortMarkup} from "./components/sort.js";
 import {getContentContainerMarkup} from "./components/content-container.js";
 import {getFilmCardMarkup} from "./components/card.js";
 import {getShowMoreBtnMarkup} from "./components/show-more-btn.js";
-import {getPopupMarkup} from "./components/popup";
+import {getPopupContainerMarkup} from "./components/popup-container.js";
+import {getPopupContentMarkup} from "./components/popup-top-content.js";
+import {getUserRatingMarkup} from "./components/popup-user-rating.js";
+import {getCommentsMarkup} from "./components/popup-comments.js";
 
 const renderElement = (element, markup, renderingCount = 1) => {
   for (let i = 0; i < renderingCount; i++) {
@@ -64,7 +67,7 @@ if (!FILMS.length) {
     let i = 0;
     for (const film of filmsArray) {
       if (i < FILMS_PORTION_TO_RENDER) {
-        renderElement(allMoviesContainerElement, getFilmCardMarkup(film.title, film.rating, film.date, film.duration, film.genres, film.description, film.comments, film.poster));
+        renderElement(allMoviesContainerElement, getFilmCardMarkup(film.title, film.rating, film.date, film.duration, film.genres, film.description, film.comments.length, film.poster));
         i++;
       } else {
         break;
@@ -93,7 +96,7 @@ if (!FILMS.length) {
     sortArrayByPropertyDescending(filmsCopy, property);
 
     for (const film of filmsCopy.slice(0, count)) {
-      renderElement(element, getFilmCardMarkup(film.title, film.rating, film.year, film.duration, film.genres, film.description, film.comments, film.poster));
+      renderElement(element, getFilmCardMarkup(film.title, film.rating, film.year, film.duration, film.genres, film.description, film.comments.length, film.poster));
     }
   };
 
@@ -101,5 +104,14 @@ if (!FILMS.length) {
   renderExtraFilmsByProperty(mostCommentedContainerElement, `comments`, EXTRA_COUNT_TO_RENDER);
 
   renderElement(document.querySelector(`.footer__statistics`), `<p>${FILMS.length} movies inside</p>`);
-  renderElement(document.querySelector(`body`), getPopupMarkup(FILMS[0].poster, FILMS[0].age, FILMS[0].title, FILMS[0].titleOriginal, FILMS[0].rating, FILMS[0].yourRate, FILMS[0].filmDirector, FILMS[0].writers, FILMS[0].actors, FILMS[0].date, FILMS[0].duration, FILMS[0].country, FILMS[0].genres));
+
+  renderElement(document.querySelector(`body`), getPopupContainerMarkup());
+
+  const popupTopContainerElement = document.querySelector(`.form-details__top-container`);
+  const popupMiddleContainerElement = document.querySelector(`.form-details__middle-container`);
+  const popupBottomContainerElement = document.querySelector(`.form-details__bottom-container`);
+
+  renderElement(popupTopContainerElement, getPopupContentMarkup(FILMS[0].poster, FILMS[0].age, FILMS[0].title, FILMS[0].titleOriginal, FILMS[0].rating, FILMS[0].yourRate, FILMS[0].filmDirector, FILMS[0].writers, FILMS[0].actors, FILMS[0].date, FILMS[0].duration, FILMS[0].country, FILMS[0].genres, FILMS[0].description, FILMS[0].isWatched));
+  renderElement(popupMiddleContainerElement, getUserRatingMarkup(FILMS[0].poster, FILMS[0].title, FILMS[0].yourRate));
+  renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0].comments.length));
 }

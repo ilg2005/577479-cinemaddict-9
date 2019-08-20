@@ -23,16 +23,20 @@ const MAX_RATING = 9;
 const RELEASE_DATES = [`01 April 1995`, `02 April 2000`, `03 April 2010`, `04 April 2015`];
 const COUNTRIES = [`USA`, `Russia`, `China`];
 
-const MIN_COMMENTS_NUMBER = 0;
-const MAX_COMMENTS_NUMBER = 100;
-
 const DURATIONS = [96, 70, 45, 132, 80, 104, 110, 90, 60];
 const MINUTES_PER_HOUR = 60;
 
 const GENRES = [`Action`, `Adventure`, `Comedy`, `Crime`];
 
+const COMMENTS = [`Interesting setting and a good cast`, `Booooooooooring`, `Very very old. Meh`, `Almost two hours? Seriously?`, `Interesting setting and a good cast`, `Booooooooooring`, `Very very old. Meh`, `Almost two hours? Seriously?`];
+
 const getRandomElementFromArray = (array) => array[Math.floor(Math.random() * array.length)];
 const getRandomInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+const getComments = (commentsArray) => {
+  const commentsCount = getRandomInRange(0, commentsArray.length);
+  return commentsArray.splice(0, commentsCount);
+};
 
 const getSeparateSentences = (text) => {
   let sentences = text.split(`.`);
@@ -74,7 +78,7 @@ const getFilm = () => (
     duration: getFormattedDuration(getRandomElementFromArray(DURATIONS)),
     genres: getGenres(GENRES),
     age: getRandomElementFromArray(AGE_REQIREMENTS),
-    comments: getRandomInRange(MIN_COMMENTS_NUMBER, MAX_COMMENTS_NUMBER),
+    comments: getComments(COMMENTS),
     isWatchList: Boolean(Math.round(Math.random())),
     isWatched: Boolean(Math.round(Math.random())),
     isFavorite: Boolean(Math.round(Math.random())),
