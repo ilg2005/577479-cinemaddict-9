@@ -18,7 +18,7 @@ const LAST_YEAR = 2018;
 const MIN_COMMENTS_NUMBER = 0;
 const MAX_COMMENTS_NUMBER = 100;
 
-const DURATIONS = [`1h 36m`, `1h 10m`, `0h 45m`, `2h 12m`, `1h 20m`, `1h 44m`, `1h 50m`, `1h 30m`];
+const DURATIONS = [96, 70, 45, 132, 80, 104, 110, 90, 60];
 
 const GENRES = [`Action`, `Adventure`, `Comedy`, `Crime`, `Drama`, `Horror`, `Epic`, `Family`, `Fantasy`, `Western`];
 
@@ -42,6 +42,8 @@ const getRating = (min, max) => {
   return getRandomElementFromArray(ratings);
 };
 
+const getFormattedDuration = (time) => (time >= 60) ? `${Math.floor(time / 60)}h ${time % 60}m` : `0h ${time}m`;
+
 const getFilm = () => (
   {
     title: getRandomElementFromArray(BEST_MOVIES_2018),
@@ -49,7 +51,7 @@ const getFilm = () => (
     description: getDescription(TEXT_FOR_DESCRIPTION),
     rating: getRating(MIN_RATING, MAX_RATING).toFixed(1),
     year: getRandomInRange(FIRST_YEAR, LAST_YEAR),
-    duration: getRandomElementFromArray(DURATIONS),
+    duration: getFormattedDuration(getRandomElementFromArray(DURATIONS)),
     genre: getRandomElementFromArray(GENRES),
     comments: getRandomInRange(MIN_COMMENTS_NUMBER, MAX_COMMENTS_NUMBER),
     isWatchList: Boolean(Math.round(Math.random())),
