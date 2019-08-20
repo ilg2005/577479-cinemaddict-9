@@ -113,5 +113,5 @@ if (!FILMS.length) {
 
   renderElement(popupTopContainerElement, getPopupContentMarkup(FILMS[0].poster, FILMS[0].age, FILMS[0].title, FILMS[0].titleOriginal, FILMS[0].rating, FILMS[0].yourRate, FILMS[0].filmDirector, FILMS[0].writers, FILMS[0].actors, FILMS[0].date, FILMS[0].duration, FILMS[0].country, FILMS[0].genres, FILMS[0].description, FILMS[0].isWatched));
   renderElement(popupMiddleContainerElement, getUserRatingMarkup(FILMS[0].poster, FILMS[0].title, FILMS[0].yourRate));
-  renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0].comments.length));
+  renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0].comments));
 }

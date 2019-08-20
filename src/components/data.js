@@ -33,9 +33,20 @@ const COMMENTS = [`Interesting setting and a good cast`, `Booooooooooring`, `Ver
 const getRandomElementFromArray = (array) => array[Math.floor(Math.random() * array.length)];
 const getRandomInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+};
+
 const getComments = (commentsArray) => {
-  const commentsCount = getRandomInRange(0, commentsArray.length);
-  return commentsArray.splice(0, commentsCount);
+  const shuffledArray = shuffleArray(commentsArray);
+  const randomCommentsCount = getRandomInRange(0, shuffledArray.length);
+  return shuffledArray.splice(0, randomCommentsCount);
 };
 
 const getSeparateSentences = (text) => {

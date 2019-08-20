@@ -1,60 +1,22 @@
-export const getCommentsMarkup = (commentsCount) => (`
+export const getCommentsMarkup = (comments) => (`
 <section class="film-details__comments-wrap">
-  <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${commentsCount}</span></h3>
+  <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${comments.length}</span></h3>
 
   <ul class="film-details__comments-list">
+    ${comments.map((comment) => `
     <li class="film-details__comment">
             <span class="film-details__comment-emoji">
               <img src="./images/emoji/smile.png" width="55" height="55" alt="emoji">
             </span>
       <div>
-        <p class="film-details__comment-text">Interesting setting and a good cast</p>
+        <p class="film-details__comment-text">${comment}</p>
         <p class="film-details__comment-info">
           <span class="film-details__comment-author">Tim Macoveev</span>
           <span class="film-details__comment-day">3 days ago</span>
           <button class="film-details__comment-delete">Delete</button>
         </p>
       </div>
-    </li>
-    <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/sleeping.png" width="55" height="55" alt="emoji">
-            </span>
-      <div>
-        <p class="film-details__comment-text">Booooooooooring</p>
-        <p class="film-details__comment-info">
-          <span class="film-details__comment-author">John Doe</span>
-          <span class="film-details__comment-day">2 days ago</span>
-          <button class="film-details__comment-delete">Delete</button>
-        </p>
-      </div>
-    </li>
-    <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/puke.png" width="55" height="55" alt="emoji">
-            </span>
-      <div>
-        <p class="film-details__comment-text">Very very old. Meh</p>
-        <p class="film-details__comment-info">
-          <span class="film-details__comment-author">John Doe</span>
-          <span class="film-details__comment-day">2 days ago</span>
-          <button class="film-details__comment-delete">Delete</button>
-        </p>
-      </div>
-    </li>
-    <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/angry.png" width="55" height="55" alt="emoji">
-            </span>
-      <div>
-        <p class="film-details__comment-text">Almost two hours? Seriously?</p>
-        <p class="film-details__comment-info">
-          <span class="film-details__comment-author">John Doe</span>
-          <span class="film-details__comment-day">Today</span>
-          <button class="film-details__comment-delete">Delete</button>
-        </p>
-      </div>
-    </li>
+    </li>`).join(``)}
   </ul>
 
   <div class="film-details__new-comment">
