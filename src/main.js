@@ -52,17 +52,6 @@ if (!FILMS.length) {
   renderElement(filmsListElement, getShowMoreBtnMarkup());
   const filmsLoaderElement = filmsListElement.querySelector(`.films-list__show-more`);
 
-  const filmsLoaderElementClickHandler = () => {
-    let filmsCopy = FILMS.slice();
-    const renderedFilmsCount = allMoviesContainerElement.querySelectorAll(`.film-card`).length;
-    filmsCopy.splice(0, renderedFilmsCount);
-    renderFilmsPortion(filmsCopy);
-  };
-
-  filmsLoaderElement.addEventListener(`click`, filmsLoaderElementClickHandler);
-
-  const FILMS_PORTION_TO_RENDER = 5;
-
   const renderFilmsPortion = (filmsArray) => {
     let i = 0;
     for (const film of filmsArray) {
@@ -80,6 +69,18 @@ if (!FILMS.length) {
     }
   };
 
+  const filmsLoaderElementClickHandler = () => {
+    let filmsCopy = FILMS.slice(0);
+    const renderedFilmsCount = allMoviesContainerElement.querySelectorAll(`.film-card`).length;
+    filmsCopy.splice(0, renderedFilmsCount);
+    renderFilmsPortion(filmsCopy);
+  };
+
+  filmsLoaderElement.addEventListener(`click`, filmsLoaderElementClickHandler);
+
+  const FILMS_PORTION_TO_RENDER = 5;
+
+
   renderFilmsPortion(FILMS);
 
   const sortArrayByPropertyDescending = (array, property) => {
@@ -92,7 +93,7 @@ if (!FILMS.length) {
   const EXTRA_COUNT_TO_RENDER = 2;
 
   const renderExtraFilmsByProperty = (element, property, count) => {
-    let [...filmsCopy] = FILMS;
+    let filmsCopy = FILMS.slice(0);
     sortArrayByPropertyDescending(filmsCopy, property);
 
     for (const film of filmsCopy.slice(0, count)) {
@@ -101,7 +102,7 @@ if (!FILMS.length) {
   };
 
   renderExtraFilmsByProperty(topRatedMoviesContainerElement, `rating`, EXTRA_COUNT_TO_RENDER);
-  renderExtraFilmsByProperty(mostCommentedContainerElement, `comments.length()`, EXTRA_COUNT_TO_RENDER);
+  renderExtraFilmsByProperty(mostCommentedContainerElement, `comments`, EXTRA_COUNT_TO_RENDER);
 
   renderElement(document.querySelector(`.footer__statistics`), `<p>${FILMS.length} movies inside</p>`);
 

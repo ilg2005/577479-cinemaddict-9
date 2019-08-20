@@ -1,7 +1,7 @@
 const CHARS_TO_SHOW = 139;
 const getShortenedDescription = (text = ``) => (text.length > CHARS_TO_SHOW) ? `${text.substr(0, CHARS_TO_SHOW)}...` : text;
 
-export const getFilmCardMarkup = (title, rating, date, duration, genres, description, comments, poster) => (`
+export const getFilmCardMarkup = (title, rating, date, duration, genres, description, commentsCount, poster) => (`
         <article class="film-card">
           <h3 class="film-card__title">${title}</h3>
           <p class="film-card__rating">${rating}</p>
@@ -12,7 +12,7 @@ export const getFilmCardMarkup = (title, rating, date, duration, genres, descrip
           </p>
           <img src="./images/posters/${poster}" alt="" class="film-card__poster">
           <p class="film-card__description">${getShortenedDescription(description)}</p>
-          <a class="film-card__comments">${comments} comments</a>
+          <a class="film-card__comments">${commentsCount} comments</a>
           <form class="film-card__controls">
             <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">Add to watchlist</button>
             <button class="film-card__controls-item button film-card__controls-item--mark-as-watched">Mark as watched</button>

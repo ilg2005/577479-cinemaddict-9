@@ -28,7 +28,7 @@ const MINUTES_PER_HOUR = 60;
 
 const GENRES = [`Action`, `Adventure`, `Comedy`, `Crime`];
 
-const COMMENTS = [`Interesting setting and a good cast`, `Booooooooooring`, `Very very old. Meh`, `Almost two hours? Seriously?`, `Interesting setting and a good cast`, `Booooooooooring`, `Very very old. Meh`, `Almost two hours? Seriously?`, `Interesting setting and a good cast`, `Booooooooooring`, `Very very old. Meh`, `Almost two hours? Seriously?`, `Interesting setting and a good cast`, `Booooooooooring`, `Very very old. Meh`, `Almost two hours? Seriously?`];
+const COMMENTS = [`Interesting setting and a good cast`, `Booooooooooring`, `Very very old. Meh`, `Almost two hours? Seriously?`];
 
 const getRandomElementFromArray = (array) => array[Math.floor(Math.random() * array.length)];
 const getRandomInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
@@ -46,7 +46,7 @@ const shuffleArray = (array) => {
 const getComments = (commentsArray) => {
   const shuffledArray = shuffleArray(commentsArray);
   const randomCommentsCount = getRandomInRange(0, shuffledArray.length);
-  return shuffledArray.splice(0, randomCommentsCount);
+  return shuffledArray.slice(0, randomCommentsCount);
 };
 
 const getSeparateSentences = (text) => {
