@@ -1,3 +1,4 @@
+const MAX_RATING = 9;
 export const getUserRatingMarkup = (poster, title, userRating) => (`
 <section class="film-details__user-rating-wrap">
   <div class="film-details__user-rating-controls">
@@ -15,10 +16,10 @@ export const getUserRatingMarkup = (poster, title, userRating) => (`
       <p class="film-details__user-rating-feelings">How you feel it?</p>
 
       <div class="film-details__user-rating-score">
-      ${Array.of(1, 2, 3, 4, 5, 6, 7, 8, 9).map((score) => `
-        <input type="radio" name="score" class="film-details__user-rating-input visually-hidden" value="${score}"
-               id="rating-${score}" ${(userRating === score) ? `checked` : ``}>
-        <label class="film-details__user-rating-label" for="rating-${score}">${score}</label>
+      ${new Array(MAX_RATING).fill(``).map((item, index) => `
+        <input type="radio" name="score" class="film-details__user-rating-input visually-hidden" value="${index + 1}"
+               id="rating-${index + 1}" ${(userRating === index + 1) ? `checked` : ``}>
+        <label class="film-details__user-rating-label" for="rating-${index + 1}">${index + 1}</label>
 `).join(``)}
       </div>
     </section>

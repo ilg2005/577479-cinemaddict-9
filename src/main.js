@@ -101,7 +101,7 @@ if (!FILMS.length) {
   };
 
   renderExtraFilmsByProperty(topRatedMoviesContainerElement, `rating`, EXTRA_COUNT_TO_RENDER);
-  renderExtraFilmsByProperty(mostCommentedContainerElement, `comments`, EXTRA_COUNT_TO_RENDER);
+  renderExtraFilmsByProperty(mostCommentedContainerElement, `comments.length()`, EXTRA_COUNT_TO_RENDER);
 
   renderElement(document.querySelector(`.footer__statistics`), `<p>${FILMS.length} movies inside</p>`);
 
