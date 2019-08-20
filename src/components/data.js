@@ -1,5 +1,5 @@
 export const FILMS = [];
-const FILMS_COUNT = 15;
+const FILMS_COUNT = 18;
 
 const BEST_MOVIES_2018 = [`Mandy`, `Annihilation`, `Love After Love`, `The Rider`, `Cold War`, `You Were Never Really Here`, `First Reformed`, `Zama`, `Eighth Grade`, `Thunder Road`, `A Private War`, `Shoplifters`, `24 Frames`, `The Ballad of Buster Scruggs`, `Filmworker`];
 
@@ -19,6 +19,7 @@ const MIN_COMMENTS_NUMBER = 0;
 const MAX_COMMENTS_NUMBER = 100;
 
 const DURATIONS = [96, 70, 45, 132, 80, 104, 110, 90, 60];
+const MINUTES_PER_HOUR = 60;
 
 const GENRES = [`Action`, `Adventure`, `Comedy`, `Crime`, `Drama`, `Horror`, `Epic`, `Family`, `Fantasy`, `Western`];
 
@@ -42,7 +43,7 @@ const getRating = (min, max) => {
   return getRandomElementFromArray(ratings);
 };
 
-const getFormattedDuration = (time) => (time >= 60) ? `${Math.floor(time / 60)}h ${time % 60}m` : `0h ${time}m`;
+const getFormattedDuration = (time) => (time >= MINUTES_PER_HOUR) ? `${Math.floor(time / MINUTES_PER_HOUR)}h ${time % MINUTES_PER_HOUR}m` : `0h ${time}m`;
 
 const getFilm = () => (
   {

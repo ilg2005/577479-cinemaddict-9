@@ -42,33 +42,64 @@ renderElement(mainElement, getContentContainerMarkup());
 const filmsSectionElement = mainElement.querySelector(`.films`);
 const filmsListElement = filmsSectionElement.querySelector(`.films-list`);
 const allMoviesContainerElement = filmsListElement.querySelector(`.all-movies`);
-const topRatedMoviesContainerElement = filmsSectionElement.querySelector(`.top-rated`);
-const mostCommentedContainerElement = filmsSectionElement.querySelector(`.most-commented`);
 
-// const FILMS_COUNT_TO_RENDER = 5;
+if (!FILMS.length) {
+  renderElement(allMoviesContainerElement, `<p>There are no movies in our database</p>`);
+} else {
+  renderElement(filmsListElement, getShowMoreBtnMarkup());
+  const filmsLoaderElement = filmsListElement.querySelector(`.films-list__show-more`);
 
-for (const film of FILMS) {
-  renderElement(allMoviesContainerElement, getFilmCardMarkup(film.title, film.rating, film.year, film.duration, film.genre, film.description, film.comments, film.poster));
-}
-renderElement(filmsListElement, getShowMoreBtnMarkup());
+  const filmsLoaderElementClickHandler = () => {
+    let filmsCopy = FILMS.slice();
+    const renderedFilmsCount = allMoviesContainerElement.querySelectorAll(`.film-card`).length;
+    filmsCopy.splice(0, renderedFilmsCount);
+    renderFilmsPortion(filmsCopy);
+  };
 
-const sortArrayByPropertyDescending = (array, property) => {
-  array.sort((a, b) => a[property] < b[property] ? 1 : -1);
-};
+  filmsLoaderElement.addEventListener(`click`, filmsLoaderElementClickHandler);
 
-const EXTRA_COUNT_TO_RENDER = 2;
+  const FILMS_PORTION_TO_RENDER = 5;
 
-const renderExtraFilmsByProperty = (element, property, count) => {
-  let [...filmsCopy] = FILMS;
-  sortArrayByPropertyDescending(filmsCopy, property);
+  const renderFilmsPortion = (filmsArray) => {
+    let i = 0;
+    for (const film of filmsArray) {
+      if (i < FILMS_PORTION_TO_RENDER) {
+        renderElement(allMoviesContainerElement, getFilmCardMarkup(film.title, film.rating, film.year, film.duration, film.genre, film.description, film.comments, film.poster));
+        i++;
+      } else {
+        break;
+      }
+    }
+    const renderedFilmsCount = allMoviesContainerElement.querySelectorAll(`.film-card`).length;
+    if (renderedFilmsCount === FILMS.length) {
+      filmsLoaderElement.classList.add(`hide`);
+      filmsLoaderElement.removeEventListener(`click`, filmsLoaderElementClickHandler);
+    }
+  };
 
-  for (const film of filmsCopy.slice(0, count)) {
-    renderElement(element, getFilmCardMarkup(film.title, film.rating, film.year, film.duration, film.genre, film.description, film.comments, film.poster));
-  }
-};
+  renderFilmsPortion(FILMS);
 
-renderExtraFilmsByProperty(topRatedMoviesContainerElement, `rating`, EXTRA_COUNT_TO_RENDER);
-renderExtraFilmsByProperty(mostCommentedContainerElement, `comments`, EXTRA_COUNT_TO_RENDER);
+  const sortArrayByPropertyDescending = (array, property) => {
+    array.sort((a, b) => a[property] < b[property] ? 1 : -1);
+  };
 
-renderElement(document.querySelector(`.footer__statistics`), `<p>${FILMS.length} movies inside</p>`);
+  const topRatedMoviesContainerElement = filmsSectionElement.querySelector(`.top-rated`);
+  const mostCommentedContainerElement = filmsSectionElement.querySelector(`.most-commented`);
+
+  const EXTRA_COUNT_TO_RENDER = 2;
+
+  const renderExtraFilmsByProperty = (element, property, count) => {
+    let [...filmsCopy] = FILMS;
+    sortArrayByPropertyDescending(filmsCopy, property);
+
+    for (const film of filmsCopy.slice(0, count)) {
+      renderElement(element, getFilmCardMarkup(film.title, film.rating, film.year, film.duration, film.genre, film.description, film.comments, film.poster));
+    }
+  };
+
+  renderExtraFilmsByProperty(topRatedMoviesContainerElement, `rating`, EXTRA_COUNT_TO_RENDER);
+  renderExtraFilmsByProperty(mostCommentedContainerElement, `comments`, EXTRA_COUNT_TO_RENDER);
+
+  renderElement(document.querySelector(`.footer__statistics`), `<p>${FILMS.length} movies inside</p>`);
 // renderElement(document.querySelector(`body`), getPopupMarkup());
+}
