@@ -94,6 +94,12 @@ if (!FILMS.length) {
 
   const renderExtraFilmsByProperty = (element, property, count) => {
     let filmsCopy = FILMS.slice(0);
+    if (property === `comments`) {
+      for (let film of filmsCopy) {
+        film.commentsCount = film.comments.length;
+      }
+      property = `commentsCount`;
+    }
     sortArrayByPropertyDescending(filmsCopy, property);
 
     for (const film of filmsCopy.slice(0, count)) {

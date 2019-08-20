@@ -28,7 +28,7 @@ const MINUTES_PER_HOUR = 60;
 
 const GENRES = [`Action`, `Adventure`, `Comedy`, `Crime`];
 
-const COMMENTS = [`Interesting setting and a good cast`, `Booooooooooring`, `Very very old. Meh`, `Almost two hours? Seriously?`];
+const COMMENTS = [`Interesting setting and a good cast`, `Booooooooooring`, `Very very old. Meh`, `Almost two hours? Seriously?`, `Definitely can recommend!`, `Great!`];
 
 const getRandomElementFromArray = (array) => array[Math.floor(Math.random() * array.length)];
 const getRandomInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
