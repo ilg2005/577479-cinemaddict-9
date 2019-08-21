@@ -94,11 +94,10 @@ if (!FILMS.length) {
 
   const renderExtraFilmsByProperty = (element, property, count) => {
     let filmsCopy = FILMS.slice(0);
-    if (property === `comments`) {
+    if (property === `commentsCount`) {
       for (let film of filmsCopy) {
         film.commentsCount = film.comments.length;
       }
-      property = `commentsCount`;
     }
     sortArrayByPropertyDescending(filmsCopy, property);
 
@@ -108,7 +107,7 @@ if (!FILMS.length) {
   };
 
   renderExtraFilmsByProperty(topRatedMoviesContainerElement, `rating`, EXTRA_COUNT_TO_RENDER);
-  renderExtraFilmsByProperty(mostCommentedContainerElement, `comments`, EXTRA_COUNT_TO_RENDER);
+  renderExtraFilmsByProperty(mostCommentedContainerElement, `commentsCount`, EXTRA_COUNT_TO_RENDER);
 
   renderElement(document.querySelector(`.footer__statistics`), `<p>${FILMS.length} movies inside</p>`);
 
