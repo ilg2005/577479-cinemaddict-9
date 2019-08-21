@@ -13,7 +13,7 @@ export const getPopupContentMarkup = (selectedFilm) => (`
           <div class="film-details__info-head">
             <div class="film-details__title-wrap">
               <h3 class="film-details__title">${selectedFilm.title}</h3>
-              <p class="film-details__title-original">Original: ${selectedFilm.original}</p>
+              <p class="film-details__title-original">Original: ${selectedFilm.titleOriginal}</p>
             </div>
 
             <div class="film-details__rating">
