@@ -96,10 +96,10 @@ const getFilm = () => (
   }
 );
 
-const getFilmsData = () => {
-  for (let i = 0; i < FILMS_COUNT; i++) {
-    FILMS.push(getFilm());
+const getFilmsData = (filmsArray, filmsCount) => {
+  for (let i = 0; i < filmsCount; i++) {
+    filmsArray.push(getFilm());
   }
 };
 
-getFilmsData();
+getFilmsData(FILMS, FILMS_COUNT);
