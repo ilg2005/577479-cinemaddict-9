@@ -56,7 +56,7 @@ if (!FILMS.length) {
     let i = 0;
     for (const film of filmsArray) {
       if (i < FILMS_PORTION_TO_RENDER) {
-        renderElement(allMoviesContainerElement, getFilmCardMarkup(film.title, film.rating, film.date, film.duration, film.genres, film.description, film.comments.length, film.poster));
+        renderElement(allMoviesContainerElement, getFilmCardMarkup(film));
         i++;
       } else {
         break;
@@ -103,7 +103,7 @@ if (!FILMS.length) {
     sortArrayByPropertyDescending(filmsCopy, property);
 
     for (const film of filmsCopy.slice(0, count)) {
-      renderElement(element, getFilmCardMarkup(film.title, film.rating, film.year, film.duration, film.genres, film.description, film.comments.length, film.poster));
+      renderElement(element, getFilmCardMarkup(film));
     }
   };
 
@@ -118,7 +118,7 @@ if (!FILMS.length) {
   const popupMiddleContainerElement = document.querySelector(`.form-details__middle-container`);
   const popupBottomContainerElement = document.querySelector(`.form-details__bottom-container`);
 
-  renderElement(popupTopContainerElement, getPopupContentMarkup(FILMS[0].poster, FILMS[0].age, FILMS[0].title, FILMS[0].titleOriginal, FILMS[0].rating, FILMS[0].yourRate, FILMS[0].filmDirector, FILMS[0].writers, FILMS[0].actors, FILMS[0].date, FILMS[0].duration, FILMS[0].country, FILMS[0].genres, FILMS[0].description, FILMS[0].isWatched));
-  renderElement(popupMiddleContainerElement, getUserRatingMarkup(FILMS[0].poster, FILMS[0].title, FILMS[0].yourRate));
-  renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0].comments));
+  renderElement(popupTopContainerElement, getPopupContentMarkup(FILMS[0]));
+  renderElement(popupMiddleContainerElement, getUserRatingMarkup(FILMS[0]));
+  renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0]));
 }

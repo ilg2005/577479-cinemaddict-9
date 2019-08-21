@@ -1,18 +1,18 @@
 const CHARS_TO_SHOW = 139;
 const getShortenedDescription = (text = ``) => (text.length > CHARS_TO_SHOW) ? `${text.substr(0, CHARS_TO_SHOW)}...` : text;
 
-export const getFilmCardMarkup = (title, rating, date, duration, genres, description, commentsCount, poster) => (`
+export const getFilmCardMarkup = (film) => (`
         <article class="film-card">
-          <h3 class="film-card__title">${title}</h3>
-          <p class="film-card__rating">${rating}</p>
+          <h3 class="film-card__title">${film.title}</h3>
+          <p class="film-card__rating">${film.rating}</p>
           <p class="film-card__info">
-            <span class="film-card__year">${new Date(date).getFullYear()}</span>
-            <span class="film-card__duration">${duration}</span>
-            <span class="film-card__genre">${genres}</span>
+            <span class="film-card__year">${new Date(film.date).getFullYear()}</span>
+            <span class="film-card__duration">${film.duration}</span>
+            <span class="film-card__genre">${film.genres}</span>
           </p>
-          <img src="./images/posters/${poster}" alt="" class="film-card__poster">
-          <p class="film-card__description">${getShortenedDescription(description)}</p>
-          <a class="film-card__comments">${commentsCount} comments</a>
+          <img src="./images/posters/${film.poster}" alt="" class="film-card__poster">
+          <p class="film-card__description">${getShortenedDescription(film.description)}</p>
+          <a class="film-card__comments">${film.commentsCount} comments</a>
           <form class="film-card__controls">
             <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">Add to watchlist</button>
             <button class="film-card__controls-item button film-card__controls-item--mark-as-watched">Mark as watched</button>
