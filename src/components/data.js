@@ -58,10 +58,8 @@ const getDescription = (text) => getSeparateSentences(text).slice(0, getRandomIn
 
 const getRating = (min, max) => {
   const ratings = [];
-  let i = min;
-  while (i <= max) {
+  for (let i = min; i <= max; i += 0.1) {
     ratings.push(i);
-    i += 0.1;
   }
   return getRandomElementFromArray(ratings);
 };
