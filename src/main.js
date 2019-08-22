@@ -51,14 +51,9 @@ if (!FILMS.length) {
   const filmsLoaderElement = filmsListElement.querySelector(`.films-list__show-more`);
 
   const renderFilmsPortion = (filmsArray) => {
-    let i = 0;
-    for (const film of filmsArray) {
-      if (i < FILMS_PORTION_TO_RENDER) {
-        renderElement(allMoviesContainerElement, getFilmCardMarkup(film));
-        i++;
-      } else {
-        break;
-      }
+    let length = filmsArray.length > FILMS_PORTION_TO_RENDER ? FILMS_PORTION_TO_RENDER : filmsArray.length;
+    for (let i = 0; i < length; i++) {
+      renderElement(allMoviesContainerElement, getFilmCardMarkup(filmsArray[i]));
     }
     const renderedFilmsCount = allMoviesContainerElement.querySelectorAll(`.film-card`).length;
     if (renderedFilmsCount === FILMS.length) {
