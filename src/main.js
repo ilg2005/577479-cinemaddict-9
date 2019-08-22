@@ -21,17 +21,15 @@ const renderElement = (element, markup, renderingCount = 1) => {
 const headerElement = document.querySelector(`.header`);
 const mainElement = document.querySelector(`.main`);
 
-const WATCHED_FILMS = 1500;
+const WATCHED_FILMS = 0;
 const getUserTitle = (filmsWatched) => {
-  let userTitle;
+  let userTitle = ``;
   if (filmsWatched >= 1 && filmsWatched <= 10) {
     userTitle = `Novice`;
   } else if (filmsWatched >= 11 && filmsWatched <= 20) {
     userTitle = `Fan`;
   } else if (filmsWatched >= 21) {
     userTitle = `Movie Buff`;
-  } else {
-    userTitle = ``;
   }
   return userTitle;
 };
