@@ -93,9 +93,9 @@ if (!FILMS.length) {
       }
     }
     sortArrayByPropertyDescending(filmsCopy, property);
-
-    for (const film of filmsCopy.slice(0, count)) {
-      renderElement(element, getFilmCardMarkup(film));
+    const length = filmsCopy.length > count ? count : filmsCopy.length;
+    for (let i = 0; i < length; i++) {
+      renderElement(element, getFilmCardMarkup(filmsCopy[i]));
     }
   };
 
