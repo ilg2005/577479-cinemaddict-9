@@ -50,13 +50,13 @@ if (!FILMS.length) {
   renderElement(filmsListElement, getShowMoreBtnMarkup());
   const filmsLoaderElement = filmsListElement.querySelector(`.films-list__show-more`);
 
-  const renderFilmsPortion = (filmsArray) => {
+  const renderFilmsPortion = (filmsArray, initialFilmsArrayLength) => {
     let length = filmsArray.length > FILMS_PORTION_TO_RENDER ? FILMS_PORTION_TO_RENDER : filmsArray.length;
     for (let i = 0; i < length; i++) {
       renderElement(allMoviesContainerElement, getFilmCardMarkup(filmsArray[i]));
     }
     const renderedFilmsCount = allMoviesContainerElement.querySelectorAll(`.film-card`).length;
-    if (renderedFilmsCount === FILMS.length) {
+    if (renderedFilmsCount === initialFilmsArrayLength) {
       filmsLoaderElement.classList.add(`hide`);
       filmsLoaderElement.removeEventListener(`click`, filmsLoaderElementClickHandler);
     }
@@ -66,7 +66,7 @@ if (!FILMS.length) {
     let filmsCopy = FILMS.slice(0);
     const renderedFilmsCount = allMoviesContainerElement.querySelectorAll(`.film-card`).length;
     filmsCopy.splice(0, renderedFilmsCount);
-    renderFilmsPortion(filmsCopy);
+    renderFilmsPortion(filmsCopy, FILMS.length);
   };
 
   filmsLoaderElement.addEventListener(`click`, filmsLoaderElementClickHandler);
@@ -74,7 +74,7 @@ if (!FILMS.length) {
   const FILMS_PORTION_TO_RENDER = 5;
 
 
-  renderFilmsPortion(FILMS);
+  renderFilmsPortion(FILMS, FILMS.length);
 
   const sortArrayByPropertyDescending = (array, property) => {
     array.sort((a, b) => a[property] < b[property] ? 1 : -1);
