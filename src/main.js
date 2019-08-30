@@ -1,16 +1,19 @@
 import {FILMS} from "./components/data.js";
 import {FILTERS} from "./components/filters-count.js";
+import {utils} from "./components/utils.js";
 import {getSearchMarkup} from "./components/search.js";
 import {getUserProfileMarkup} from "./components/user-profile.js";
 import {getMenuMarkup} from "./components/menu.js";
 import {getSortMarkup} from "./components/sort.js";
 import {getContentContainerMarkup} from "./components/content-container.js";
-import {getFilmCardMarkup} from "./components/card.js";
+import Film from "./components/film.js";
 import {getShowMoreBtnMarkup} from "./components/show-more-btn.js";
+/*
 import {getPopupContainerMarkup} from "./components/popup-container.js";
 import {getPopupContentMarkup} from "./components/popup-top-content.js";
 import {getUserRatingMarkup} from "./components/popup-user-rating.js";
 import {getCommentsMarkup} from "./components/popup-comments.js";
+*/
 
 const renderElement = (element, markup, renderingCount = 1) => {
   for (let i = 0; i < renderingCount; i++) {
@@ -48,6 +51,13 @@ if (!FILMS.length) {
   renderElement(allMoviesContainerElement, `<p>There are no movies in our database</p>`);
 } else {
   renderElement(filmsListElement, getShowMoreBtnMarkup());
+  const renderFilm = (filmCard) => {
+    const film = new Film(filmCard);
+
+    utils.render(allMoviesContainerElement, film.getElement(), `beforeend`);
+  };
+  FILMS.forEach((filmCard) => renderFilm(filmCard));
+/*
   const filmsLoaderElement = filmsListElement.querySelector(`.films-list__show-more`);
 
   const renderFilmsPortion = (filmsArray, initialFilmsArrayLength) => {
@@ -113,4 +123,5 @@ if (!FILMS.length) {
   renderElement(popupTopContainerElement, getPopupContentMarkup(FILMS[0]));
   renderElement(popupMiddleContainerElement, getUserRatingMarkup(FILMS[0]));
   renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0]));
+*/
 }
