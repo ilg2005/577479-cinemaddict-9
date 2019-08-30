@@ -4,7 +4,7 @@ import Search from "./components/search.js";
 import User from "./components/user.js";
 import Filters from "./components/filters.js";
 import Sort from "./components/sort.js";
-import {getContentContainerMarkup} from "./components/content-container.js";
+import ContentContainer from "./components/content-container.js";
 import Film from "./components/film.js";
 import {getShowMoreBtnMarkup} from "./components/show-more-btn.js";
 /*
@@ -35,7 +35,9 @@ utils.render(mainElement, filters.getElement(), `beforeend`);
 
 const sort = new Sort();
 utils.render(mainElement, sort.getElement(), `beforeend`);
-renderElement(mainElement, getContentContainerMarkup());
+
+const contentContainer = new ContentContainer();
+utils.render(mainElement, contentContainer.getElement(), `beforeend`);
 
 const filmsSectionElement = mainElement.querySelector(`.films`);
 const filmsListElement = filmsSectionElement.querySelector(`.films-list`);

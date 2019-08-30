@@ -1,5 +1,16 @@
-export const getContentContainerMarkup = () => (`
-  <section class="films">
+import {utils} from "./utils.js";
+
+export default class ContentContainer {
+  getElement() {
+    if (!this._element) {
+      this._element = utils.createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  getTemplate() {
+    return `<section class="films">
     <section class="films-list">
       <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
 
@@ -19,5 +30,6 @@ export const getContentContainerMarkup = () => (`
       </div>
     </section>
 
-  </section>
-`);
+  </section>`;
+  }
+}
