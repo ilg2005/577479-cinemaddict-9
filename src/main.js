@@ -120,9 +120,9 @@ if (!FILMS.length) {
       const popupContainer = new PopupContainer();
       utils.render(document.querySelector(`body`), popupContainer.getElement(), `beforeend`);
 
-      const popupTopContainerElement = document.querySelector(`.form-details__top-container`);
-      const popupMiddleContainerElement = document.querySelector(`.form-details__middle-container`);
-      const popupBottomContainerElement = document.querySelector(`.form-details__bottom-container`);
+      const popupTopContainerElement = popupContainer._element.querySelector(`.form-details__top-container`);
+      const popupMiddleContainerElement = popupContainer._element.querySelector(`.form-details__middle-container`);
+      const popupBottomContainerElement = popupContainer._element.querySelector(`.form-details__bottom-container`);
 
       const popupTopContent = new PopupTopContent(FILMS[filmCardElement.id]);
       utils.render(popupTopContainerElement, popupTopContent.getElement(), `beforeend`);
@@ -132,6 +132,22 @@ if (!FILMS.length) {
 
       const popupComments = new PopupComments(FILMS[filmCardElement.id]);
       utils.render(popupBottomContainerElement, popupComments.getElement(), `beforeend`);
+
+      const closeBtnElement = popupContainer._element.querySelector(`.film-details__close-btn`);
+
+      const closeBtnElementClickHandler = () => {
+        utils.unrender(popupContainer._element);
+        closeBtnElement.removeEventListener(`click`, closeBtnElementClickHandler);
+      };
+      closeBtnElement.addEventListener(`click`, closeBtnElementClickHandler);
+
+      const documentKeydownHandler = (e) => {
+        if (e.key === `Escape` || e.key === `Esc`) {
+          utils.unrender(popupContainer._element);
+          document.removeEventListener(`keydown`, documentKeydownHandler);
+        }
+      };
+      document.addEventListener(`keydown`, documentKeydownHandler);
     }
   };
 
