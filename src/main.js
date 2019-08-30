@@ -8,9 +8,9 @@ import ContentContainer from "./components/content-container.js";
 import Film from "./components/film.js";
 import ShowMoreBtn from "./components/show-more-btn.js";
 import Footer from "./components/footer.js";
+import PopupContainer from "./components/popup-container.js";
 
 /*
-import {getPopupContainerMarkup} from "./components/popup-container.js";
 import {getPopupContentMarkup} from "./components/popup-top-content.js";
 import {getUserRatingMarkup} from "./components/popup-user-rating.js";
 import {getCommentsMarkup} from "./components/popup-comments.js";
@@ -115,13 +115,14 @@ if (!FILMS.length) {
   const footer = new Footer(FILMS);
   utils.render(document.querySelector(`.footer__statistics`), footer.getElement(), `beforeend`);
 
-/*
-  renderElement(document.querySelector(`body`), getPopupContainerMarkup());
+  const popupContainer = new PopupContainer();
+  utils.render(document.querySelector(`body`), popupContainer.getElement(), `beforeend`);
 
   const popupTopContainerElement = document.querySelector(`.form-details__top-container`);
   const popupMiddleContainerElement = document.querySelector(`.form-details__middle-container`);
   const popupBottomContainerElement = document.querySelector(`.form-details__bottom-container`);
 
+/*
   renderElement(popupTopContainerElement, getPopupContentMarkup(FILMS[0]));
   renderElement(popupMiddleContainerElement, getUserRatingMarkup(FILMS[0]));
   renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0]));

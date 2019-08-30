@@ -527,7 +527,6 @@ button {
 
 .film-details {
   position: fixed;
-  display: none;
   height: 100vh;
   top: 0;
   right: 0;
