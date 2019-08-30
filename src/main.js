@@ -3,7 +3,7 @@ import {utils} from "./components/utils.js";
 import Search from "./components/search.js";
 import User from "./components/user.js";
 import Filters from "./components/filters.js";
-import {getSortMarkup} from "./components/sort.js";
+import Sort from "./components/sort.js";
 import {getContentContainerMarkup} from "./components/content-container.js";
 import Film from "./components/film.js";
 import {getShowMoreBtnMarkup} from "./components/show-more-btn.js";
@@ -33,7 +33,8 @@ utils.render(headerElement, user.getElement(), `beforeend`);
 const filters = new Filters(FILMS);
 utils.render(mainElement, filters.getElement(), `beforeend`);
 
-renderElement(mainElement, getSortMarkup());
+const sort = new Sort();
+utils.render(mainElement, sort.getElement(), `beforeend`);
 renderElement(mainElement, getContentContainerMarkup());
 
 const filmsSectionElement = mainElement.querySelector(`.films`);
