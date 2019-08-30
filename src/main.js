@@ -7,6 +7,8 @@ import Sort from "./components/sort.js";
 import ContentContainer from "./components/content-container.js";
 import Film from "./components/film.js";
 import ShowMoreBtn from "./components/show-more-btn.js";
+import Footer from "./components/footer.js";
+
 /*
 import {getPopupContainerMarkup} from "./components/popup-container.js";
 import {getPopupContentMarkup} from "./components/popup-top-content.js";
@@ -111,7 +113,8 @@ if (!FILMS.length) {
   renderExtraFilmsByProperty(topRatedMoviesContainerElement, `rating`, EXTRA_COUNT_TO_RENDER);
   renderExtraFilmsByProperty(mostCommentedContainerElement, `commentsCount`, EXTRA_COUNT_TO_RENDER);
 
-  renderElement(document.querySelector(`.footer__statistics`), `<p>${FILMS.length} movies inside</p>`);
+  const footer = new Footer(FILMS);
+  utils.render(document.querySelector(`.footer__statistics`), footer.getElement(), `beforeend`);
 
 /*
   renderElement(document.querySelector(`body`), getPopupContainerMarkup());
