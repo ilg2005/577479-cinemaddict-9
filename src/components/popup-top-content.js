@@ -28,7 +28,7 @@ export default class PopupTopContent {
   }
 
   getTemplate() {
-    return `<div class="film-details__close">
+    return `<div><div class="film-details__close">
         <button class="film-details__close-btn" type="button">close</button>
       </div>
       <div class="film-details__info-wrap">
@@ -100,6 +100,6 @@ export default class PopupTopContent {
         <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite">
         <label for="favorite" class="film-details__control-label film-details__control-label--favorite">Add to favorites</label>
       </section>
-    </div>`;
+    </div></div>`;
   }
 }
