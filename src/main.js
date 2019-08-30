@@ -50,19 +50,19 @@ if (!FILMS.length) {
 } else {
   const showMoreBtn = new ShowMoreBtn();
   utils.render(filmsListElement, showMoreBtn.getElement(), `beforeend`);
+
   const renderFilm = (filmCard) => {
     const film = new Film(filmCard);
 
     utils.render(allMoviesContainerElement, film.getElement(), `beforeend`);
   };
-  FILMS.forEach((filmCard) => renderFilm(filmCard));
-  /*
+
   const filmsLoaderElement = filmsListElement.querySelector(`.films-list__show-more`);
 
   const renderFilmsPortion = (filmsArray, initialFilmsArrayLength) => {
     let length = filmsArray.length > FILMS_PORTION_TO_RENDER ? FILMS_PORTION_TO_RENDER : filmsArray.length;
     for (let i = 0; i < length; i++) {
-      renderElement(allMoviesContainerElement, getFilmCardMarkup(filmsArray[i]));
+      renderFilm(filmsArray[i]);
     }
     const renderedFilmsCount = allMoviesContainerElement.querySelectorAll(`.film-card`).length;
     if (renderedFilmsCount === initialFilmsArrayLength) {
@@ -84,7 +84,6 @@ if (!FILMS.length) {
 
 
   renderFilmsPortion(FILMS, FILMS.length);
-*/
 
   const sortArrayByPropertyDescending = (array, property) => {
     array.sort((a, b) => a[property] < b[property] ? 1 : -1);
