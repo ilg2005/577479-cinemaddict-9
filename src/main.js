@@ -10,9 +10,9 @@ import ShowMoreBtn from "./components/show-more-btn.js";
 import Footer from "./components/footer.js";
 import PopupContainer from "./components/popup-container.js";
 import PopupTopContent from "./components/popup-top-content.js";
+import PopupUserRating from "./components/popup-user-rating.js";
 
 /*
-import {getUserRatingMarkup} from "./components/popup-user-rating.js";
 import {getCommentsMarkup} from "./components/popup-comments.js";
 */
 
@@ -125,8 +125,10 @@ if (!FILMS.length) {
   const popupTopContent = new PopupTopContent(FILMS[0]);
   utils.render(popupTopContainerElement, popupTopContent.getElement(), `beforeend`);
 
+  const popupUserRating = new PopupUserRating(FILMS[0]);
+  utils.render(popupMiddleContainerElement, popupUserRating.getElement(), `beforeend`);
+
   /*
-    renderElement(popupMiddleContainerElement, getUserRatingMarkup(FILMS[0]));
     renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0]));
   */
 }
