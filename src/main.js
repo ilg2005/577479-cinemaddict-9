@@ -54,7 +54,7 @@ if (!FILMS.length) {
     utils.render(allMoviesContainerElement, film.getElement(), `beforeend`);
   };
   FILMS.forEach((filmCard) => renderFilm(filmCard));
-/*
+  /*
   const filmsLoaderElement = filmsListElement.querySelector(`.films-list__show-more`);
 
   const renderFilmsPortion = (filmsArray, initialFilmsArrayLength) => {
@@ -82,6 +82,7 @@ if (!FILMS.length) {
 
 
   renderFilmsPortion(FILMS, FILMS.length);
+*/
 
   const sortArrayByPropertyDescending = (array, property) => {
     array.sort((a, b) => a[property] < b[property] ? 1 : -1);
@@ -102,7 +103,8 @@ if (!FILMS.length) {
     sortArrayByPropertyDescending(filmsCopy, property);
     const length = filmsCopy.length > count ? count : filmsCopy.length;
     for (let i = 0; i < length; i++) {
-      renderElement(element, getFilmCardMarkup(filmsCopy[i]));
+      const filmCard = new Film(filmsCopy[i]);
+      utils.render(element, filmCard.getElement(), `beforeend`);
     }
   };
 
@@ -111,6 +113,7 @@ if (!FILMS.length) {
 
   renderElement(document.querySelector(`.footer__statistics`), `<p>${FILMS.length} movies inside</p>`);
 
+/*
   renderElement(document.querySelector(`body`), getPopupContainerMarkup());
 
   const popupTopContainerElement = document.querySelector(`.form-details__top-container`);
