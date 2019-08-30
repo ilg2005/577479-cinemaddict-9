@@ -2,7 +2,7 @@ import {FILMS} from "./components/data.js";
 import {FILTERS} from "./components/filters-count.js";
 import {utils} from "./components/utils.js";
 import Search from "./components/search.js";
-import {getUserProfileMarkup} from "./components/user-profile.js";
+import User from "./components/user.js";
 import {getMenuMarkup} from "./components/menu.js";
 import {getSortMarkup} from "./components/sort.js";
 import {getContentContainerMarkup} from "./components/content-container.js";
@@ -24,23 +24,13 @@ const renderElement = (element, markup, renderingCount = 1) => {
 const headerElement = document.querySelector(`.header`);
 const mainElement = document.querySelector(`.main`);
 
-const WATCHED_FILMS = 0;
-const getUserTitle = (filmsWatched) => {
-  let userTitle = ``;
-  if (filmsWatched >= 1 && filmsWatched <= 10) {
-    userTitle = `Novice`;
-  } else if (filmsWatched >= 11 && filmsWatched <= 20) {
-    userTitle = `Fan`;
-  } else if (filmsWatched >= 21) {
-    userTitle = `Movie Buff`;
-  }
-  return userTitle;
-};
-
 const searchField = new Search();
 utils.render(headerElement, searchField.getElement(), `beforeend`);
 
-renderElement(headerElement, getUserProfileMarkup(getUserTitle(WATCHED_FILMS)));
+const WATCHED_FILMS_NUMBER = 100;
+const user = new User(WATCHED_FILMS_NUMBER);
+utils.render(headerElement, user.getElement(), `beforeend`);
+
 renderElement(mainElement, getMenuMarkup(FILTERS));
 renderElement(mainElement, getSortMarkup());
 renderElement(mainElement, getContentContainerMarkup());
