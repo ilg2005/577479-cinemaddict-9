@@ -1,7 +1,7 @@
 import {FILMS} from "./components/data.js";
 import {FILTERS} from "./components/filters-count.js";
 import {utils} from "./components/utils.js";
-import {getSearchMarkup} from "./components/search.js";
+import Search from "./components/search.js";
 import {getUserProfileMarkup} from "./components/user-profile.js";
 import {getMenuMarkup} from "./components/menu.js";
 import {getSortMarkup} from "./components/sort.js";
@@ -37,7 +37,9 @@ const getUserTitle = (filmsWatched) => {
   return userTitle;
 };
 
-renderElement(headerElement, getSearchMarkup());
+const searchField = new Search();
+utils.render(headerElement, searchField.getElement(), `beforeend`);
+
 renderElement(headerElement, getUserProfileMarkup(getUserTitle(WATCHED_FILMS)));
 renderElement(mainElement, getMenuMarkup(FILTERS));
 renderElement(mainElement, getSortMarkup());
