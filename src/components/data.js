@@ -97,6 +97,7 @@ const getFilm = () => (
 const getFilmsData = (filmsArray, filmsCount) => {
   for (let i = 0; i < filmsCount; i++) {
     filmsArray.push(getFilm());
+    filmsArray[i].id = i;
   }
 };
 
