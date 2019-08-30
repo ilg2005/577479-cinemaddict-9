@@ -6,7 +6,7 @@ import Filters from "./components/filters.js";
 import Sort from "./components/sort.js";
 import ContentContainer from "./components/content-container.js";
 import Film from "./components/film.js";
-import {getShowMoreBtnMarkup} from "./components/show-more-btn.js";
+import ShowMoreBtn from "./components/show-more-btn.js";
 /*
 import {getPopupContainerMarkup} from "./components/popup-container.js";
 import {getPopupContentMarkup} from "./components/popup-top-content.js";
@@ -46,7 +46,8 @@ const allMoviesContainerElement = filmsListElement.querySelector(`.all-movies`);
 if (!FILMS.length) {
   renderElement(allMoviesContainerElement, `<p>There are no movies in our database</p>`);
 } else {
-  renderElement(filmsListElement, getShowMoreBtnMarkup());
+  const showMoreBtn = new ShowMoreBtn();
+  utils.render(filmsListElement, showMoreBtn.getElement(), `beforeend`);
   const renderFilm = (filmCard) => {
     const film = new Film(filmCard);
 
