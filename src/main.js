@@ -1,9 +1,8 @@
 import {FILMS} from "./components/data.js";
-import {FILTERS} from "./components/filters-count.js";
 import {utils} from "./components/utils.js";
 import Search from "./components/search.js";
 import User from "./components/user.js";
-import {getMenuMarkup} from "./components/menu.js";
+import Filters from "./components/filters.js";
 import {getSortMarkup} from "./components/sort.js";
 import {getContentContainerMarkup} from "./components/content-container.js";
 import Film from "./components/film.js";
@@ -31,7 +30,9 @@ const WATCHED_FILMS_NUMBER = 100;
 const user = new User(WATCHED_FILMS_NUMBER);
 utils.render(headerElement, user.getElement(), `beforeend`);
 
-renderElement(mainElement, getMenuMarkup(FILTERS));
+const filters = new Filters(FILMS);
+utils.render(mainElement, filters.getElement(), `beforeend`);
+
 renderElement(mainElement, getSortMarkup());
 renderElement(mainElement, getContentContainerMarkup());
 
