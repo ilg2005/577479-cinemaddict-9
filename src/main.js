@@ -9,9 +9,9 @@ import Film from "./components/film.js";
 import ShowMoreBtn from "./components/show-more-btn.js";
 import Footer from "./components/footer.js";
 import PopupContainer from "./components/popup-container.js";
+import PopupTopContent from "./components/popup-top-content.js";
 
 /*
-import {getPopupContentMarkup} from "./components/popup-top-content.js";
 import {getUserRatingMarkup} from "./components/popup-user-rating.js";
 import {getCommentsMarkup} from "./components/popup-comments.js";
 */
@@ -122,9 +122,11 @@ if (!FILMS.length) {
   const popupMiddleContainerElement = document.querySelector(`.form-details__middle-container`);
   const popupBottomContainerElement = document.querySelector(`.form-details__bottom-container`);
 
-/*
-  renderElement(popupTopContainerElement, getPopupContentMarkup(FILMS[0]));
-  renderElement(popupMiddleContainerElement, getUserRatingMarkup(FILMS[0]));
-  renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0]));
-*/
+  const popupTopContent = new PopupTopContent(FILMS[0]);
+  utils.render(popupTopContainerElement, popupTopContent.getElement(), `beforeend`);
+
+  /*
+    renderElement(popupMiddleContainerElement, getUserRatingMarkup(FILMS[0]));
+    renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0]));
+  */
 }
