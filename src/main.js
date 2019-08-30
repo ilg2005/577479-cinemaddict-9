@@ -11,10 +11,7 @@ import Footer from "./components/footer.js";
 import PopupContainer from "./components/popup-container.js";
 import PopupTopContent from "./components/popup-top-content.js";
 import PopupUserRating from "./components/popup-user-rating.js";
-
-/*
-import {getCommentsMarkup} from "./components/popup-comments.js";
-*/
+import PopupComments from "./components/popup-comments.js";
 
 const renderElement = (element, markup, renderingCount = 1) => {
   for (let i = 0; i < renderingCount; i++) {
@@ -128,7 +125,6 @@ if (!FILMS.length) {
   const popupUserRating = new PopupUserRating(FILMS[0]);
   utils.render(popupMiddleContainerElement, popupUserRating.getElement(), `beforeend`);
 
-  /*
-    renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0]));
-  */
+  const popupComments = new PopupComments(FILMS[0]);
+  utils.render(popupBottomContainerElement, popupComments.getElement(), `beforeend`);
 }
