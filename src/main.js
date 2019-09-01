@@ -139,8 +139,10 @@ if (!FILMS.length) {
 
       const documentKeydownHandler = (e) => {
         if (e.key === `Escape` || e.key === `Esc`) {
-          utils.unrender(popupContainer._element);
-          document.removeEventListener(`keydown`, documentKeydownHandler);
+          if (e.target !== popupContainer._element.querySelector(`.film-details__comment-input`)) {
+            utils.unrender(popupContainer._element);
+            document.removeEventListener(`keydown`, documentKeydownHandler);
+          }
         }
       };
       document.addEventListener(`keydown`, documentKeydownHandler);
