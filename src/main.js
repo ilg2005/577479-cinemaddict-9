@@ -1,59 +1,62 @@
 import {FILMS} from "./components/data.js";
-import {FILTERS} from "./components/filters-count.js";
-import {getSearchMarkup} from "./components/search.js";
-import {getUserProfileMarkup} from "./components/user-profile.js";
-import {getMenuMarkup} from "./components/menu.js";
-import {getSortMarkup} from "./components/sort.js";
-import {getContentContainerMarkup} from "./components/content-container.js";
-import {getFilmCardMarkup} from "./components/card.js";
-import {getShowMoreBtnMarkup} from "./components/show-more-btn.js";
-import {getPopupContainerMarkup} from "./components/popup-container.js";
-import {getPopupContentMarkup} from "./components/popup-top-content.js";
-import {getUserRatingMarkup} from "./components/popup-user-rating.js";
-import {getCommentsMarkup} from "./components/popup-comments.js";
-
-const renderElement = (element, markup, renderingCount = 1) => {
-  for (let i = 0; i < renderingCount; i++) {
-    element.insertAdjacentHTML(`beforeend`, markup);
-  }
-};
+import {utils} from "./components/utils.js";
+import Search from "./components/search.js";
+import User from "./components/user.js";
+import Filters from "./components/filters.js";
+import Sort from "./components/sort.js";
+import ContentContainer from "./components/content-container.js";
+import Film from "./components/film.js";
+import ShowMoreBtn from "./components/show-more-btn.js";
+import Footer from "./components/footer.js";
+import PopupContainer from "./components/popup-container.js";
+import PopupTopContent from "./components/popup-top-content.js";
+import PopupUserRating from "./components/popup-user-rating.js";
+import PopupComments from "./components/popup-comments.js";
+import NoMovies from "./components/no-movies";
 
 const headerElement = document.querySelector(`.header`);
 const mainElement = document.querySelector(`.main`);
 
-const WATCHED_FILMS = 0;
-const getUserTitle = (filmsWatched) => {
-  let userTitle = ``;
-  if (filmsWatched >= 1 && filmsWatched <= 10) {
-    userTitle = `Novice`;
-  } else if (filmsWatched >= 11 && filmsWatched <= 20) {
-    userTitle = `Fan`;
-  } else if (filmsWatched >= 21) {
-    userTitle = `Movie Buff`;
-  }
-  return userTitle;
-};
+const searchField = new Search();
+utils.render(headerElement, searchField.getElement(), `beforeend`);
 
-renderElement(headerElement, getSearchMarkup());
-renderElement(headerElement, getUserProfileMarkup(getUserTitle(WATCHED_FILMS)));
-renderElement(mainElement, getMenuMarkup(FILTERS));
-renderElement(mainElement, getSortMarkup());
-renderElement(mainElement, getContentContainerMarkup());
+const WATCHED_FILMS_NUMBER = 100;
+const user = new User(WATCHED_FILMS_NUMBER);
+utils.render(headerElement, user.getElement(), `beforeend`);
+
+const filters = new Filters(FILMS);
+utils.render(mainElement, filters.getElement(), `beforeend`);
+
+const sort = new Sort();
+utils.render(mainElement, sort.getElement(), `beforeend`);
+
+const contentContainer = new ContentContainer();
+utils.render(mainElement, contentContainer.getElement(), `beforeend`);
 
 const filmsSectionElement = mainElement.querySelector(`.films`);
 const filmsListElement = filmsSectionElement.querySelector(`.films-list`);
 const allMoviesContainerElement = filmsListElement.querySelector(`.all-movies`);
 
 if (!FILMS.length) {
-  renderElement(allMoviesContainerElement, `<p>There are no movies in our database</p>`);
+  const noMovies = new NoMovies();
+  utils.render(allMoviesContainerElement, noMovies.getElement(), `beforeend`);
 } else {
-  renderElement(filmsListElement, getShowMoreBtnMarkup());
+  const showMoreBtn = new ShowMoreBtn();
+  utils.render(filmsListElement, showMoreBtn.getElement(), `beforeend`);
+
+  const renderFilm = (filmCard) => {
+    const film = new Film(filmCard);
+
+    utils.render(allMoviesContainerElement, film.getElement(), `beforeend`);
+    film.getElement().id = filmCard.id;
+  };
+
   const filmsLoaderElement = filmsListElement.querySelector(`.films-list__show-more`);
 
   const renderFilmsPortion = (filmsArray, initialFilmsArrayLength) => {
     let length = filmsArray.length > FILMS_PORTION_TO_RENDER ? FILMS_PORTION_TO_RENDER : filmsArray.length;
     for (let i = 0; i < length; i++) {
-      renderElement(allMoviesContainerElement, getFilmCardMarkup(filmsArray[i]));
+      renderFilm(filmsArray[i]);
     }
     const renderedFilmsCount = allMoviesContainerElement.querySelectorAll(`.film-card`).length;
     if (renderedFilmsCount === initialFilmsArrayLength) {
@@ -95,22 +98,53 @@ if (!FILMS.length) {
     sortArrayByPropertyDescending(filmsCopy, property);
     const length = filmsCopy.length > count ? count : filmsCopy.length;
     for (let i = 0; i < length; i++) {
-      renderElement(element, getFilmCardMarkup(filmsCopy[i]));
+      const filmCard = new Film(filmsCopy[i]);
+      utils.render(element, filmCard.getElement(), `beforeend`);
+      filmCard.getElement().id = filmsCopy[i].id;
     }
   };
 
   renderExtraFilmsByProperty(topRatedMoviesContainerElement, `rating`, EXTRA_COUNT_TO_RENDER);
   renderExtraFilmsByProperty(mostCommentedContainerElement, `commentsCount`, EXTRA_COUNT_TO_RENDER);
 
-  renderElement(document.querySelector(`.footer__statistics`), `<p>${FILMS.length} movies inside</p>`);
+  const footer = new Footer(FILMS);
+  utils.render(document.querySelector(`.footer__statistics`), footer.getElement(), `beforeend`);
 
-  renderElement(document.querySelector(`body`), getPopupContainerMarkup());
+  const mainElementClickHandler = (evt) => {
+    if (evt.target.parentElement.className === `film-card`) {
+      const filmCardElement = evt.target.parentElement;
+      const popupContainer = new PopupContainer();
+      utils.render(document.querySelector(`body`), popupContainer.getElement(), `beforeend`);
 
-  const popupTopContainerElement = document.querySelector(`.form-details__top-container`);
-  const popupMiddleContainerElement = document.querySelector(`.form-details__middle-container`);
-  const popupBottomContainerElement = document.querySelector(`.form-details__bottom-container`);
+      const popupTopContent = new PopupTopContent(FILMS[filmCardElement.id]);
+      utils.render(popupContainer._element, popupTopContent.getElement(), `beforeend`);
 
-  renderElement(popupTopContainerElement, getPopupContentMarkup(FILMS[0]));
-  renderElement(popupMiddleContainerElement, getUserRatingMarkup(FILMS[0]));
-  renderElement(popupBottomContainerElement, getCommentsMarkup(FILMS[0]));
+      const popupUserRating = new PopupUserRating(FILMS[filmCardElement.id]);
+      utils.render(popupContainer._element, popupUserRating.getElement(), `beforeend`);
+
+      const popupComments = new PopupComments(FILMS[filmCardElement.id]);
+      utils.render(popupContainer._element, popupComments.getElement(), `beforeend`);
+
+      const closeBtnElement = popupContainer._element.querySelector(`.film-details__close-btn`);
+
+      const closeBtnElementClickHandler = () => {
+        utils.unrender(popupContainer._element);
+        closeBtnElement.removeEventListener(`click`, closeBtnElementClickHandler);
+      };
+      closeBtnElement.addEventListener(`click`, closeBtnElementClickHandler);
+
+      const documentKeydownHandler = (e) => {
+        if (e.key === `Escape` || e.key === `Esc`) {
+          if (e.target !== popupContainer._element.querySelector(`.film-details__comment-input`)) {
+            utils.unrender(popupContainer._element);
+            document.removeEventListener(`keydown`, documentKeydownHandler);
+          }
+        }
+      };
+      document.addEventListener(`keydown`, documentKeydownHandler);
+    }
+  };
+
+  mainElement.addEventListener(`click`, mainElementClickHandler);
+
 }

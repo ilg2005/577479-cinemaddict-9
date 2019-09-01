@@ -1,6 +1,6 @@
 import {utils} from "./utils.js";
 
-export default class ShowMoreBtn {
+export default class NoMovies {
   getElement() {
     if (!this._element) {
       this._element = utils.createElement(this.getTemplate());
@@ -14,6 +14,8 @@ export default class ShowMoreBtn {
   }
 
   getTemplate() {
-    return `<button class="films-list__show-more">Show more</button>`;
+    return `<div class="no-result">
+        There are no movies in our database
+      </div>`;
   }
 }

@@ -1,6 +1,10 @@
 import {utils} from "./utils.js";
 
-export default class ShowMoreBtn {
+export default class Footer {
+  constructor(filmsArray) {
+    this._allFilmsCount = filmsArray.length;
+  }
+
   getElement() {
     if (!this._element) {
       this._element = utils.createElement(this.getTemplate());
@@ -14,6 +18,6 @@ export default class ShowMoreBtn {
   }
 
   getTemplate() {
-    return `<button class="films-list__show-more">Show more</button>`;
+    return `<p>${this._allFilmsCount} movies inside</p>`;
   }
 }
