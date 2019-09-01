@@ -12,12 +12,7 @@ import PopupContainer from "./components/popup-container.js";
 import PopupTopContent from "./components/popup-top-content.js";
 import PopupUserRating from "./components/popup-user-rating.js";
 import PopupComments from "./components/popup-comments.js";
-
-const renderElement = (element, markup, renderingCount = 1) => {
-  for (let i = 0; i < renderingCount; i++) {
-    element.insertAdjacentHTML(`beforeend`, markup);
-  }
-};
+import NoMovies from "./components/no-movies";
 
 const headerElement = document.querySelector(`.header`);
 const mainElement = document.querySelector(`.main`);
@@ -43,7 +38,8 @@ const filmsListElement = filmsSectionElement.querySelector(`.films-list`);
 const allMoviesContainerElement = filmsListElement.querySelector(`.all-movies`);
 
 if (!FILMS.length) {
-  renderElement(allMoviesContainerElement, `<p>There are no movies in our database</p>`);
+  const noMovies = new NoMovies();
+  utils.render(allMoviesContainerElement, noMovies.getElement(), `beforeend`);
 } else {
   const showMoreBtn = new ShowMoreBtn();
   utils.render(filmsListElement, showMoreBtn.getElement(), `beforeend`);
