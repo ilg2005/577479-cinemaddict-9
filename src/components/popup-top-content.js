@@ -27,6 +27,10 @@ export default class PopupTopContent {
     return this._element;
   }
 
+  removeElement() {
+    this._element = null;
+  }
+
   getTemplate() {
     return `<div class="form-details__top-container">
       <div class="film-details__close">

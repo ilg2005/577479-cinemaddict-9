@@ -35,6 +35,10 @@ export default class Film {
     return this._element;
   }
 
+  removeElement() {
+    this._element = null;
+  }
+
   getTemplate() {
     return `<article class="film-card">
           <h3 class="film-card__title">${this._title}</h3>

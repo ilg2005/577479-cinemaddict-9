@@ -9,6 +9,10 @@ export default class Search {
     return this._element;
   }
 
+  removeElement() {
+    this._element = null;
+  }
+
   getTemplate() {
     return `<form class="header__search search">
     <input type="text" name="search" class="search__field" placeholder="Search movies" value="popeye">

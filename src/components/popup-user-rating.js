@@ -17,6 +17,10 @@ export default class PopupUserRating {
     return this._element;
   }
 
+  removeElement() {
+    this._element = null;
+  }
+
   getTemplate() {
     return `<div class="form-details__middle-container">
 <section class="film-details__user-rating-wrap">

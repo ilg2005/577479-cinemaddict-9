@@ -13,6 +13,10 @@ export default class PopupComments {
     return this._element;
   }
 
+  removeElement() {
+    this._element = null;
+  }
+
   getTemplate() {
     return `<div class="form-details__bottom-container">
 <section class="film-details__comments-wrap">

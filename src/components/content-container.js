@@ -9,6 +9,10 @@ export default class ContentContainer {
     return this._element;
   }
 
+  removeElement() {
+    this._element = null;
+  }
+
   getTemplate() {
     return `<section class="films">
     <section class="films-list">

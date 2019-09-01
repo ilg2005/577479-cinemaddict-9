@@ -9,6 +9,10 @@ export default class PopupContainer {
     return this._element;
   }
 
+  removeElement() {
+    this._element = null;
+  }
+
   getTemplate() {
     return `<section class="film-details">
   <form class="film-details__inner" action="" method="get">

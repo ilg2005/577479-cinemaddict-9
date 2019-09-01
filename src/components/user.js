@@ -25,6 +25,10 @@ export default class User {
     return this._element;
   }
 
+  removeElement() {
+    this._element = null;
+  }
+
   getTemplate() {
     return `<section class="header__profile profile">
     <p class="profile__rating">${this.getUserTitle()}</p>

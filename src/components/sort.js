@@ -9,6 +9,10 @@ export default class Sort {
     return this._element;
   }
 
+  removeElement() {
+    this._element = null;
+  }
+
   getTemplate() {
     return `<ul class="sort">
                 <li><a href="#" class="sort__button sort__button--active">Sort by default</a></li>
