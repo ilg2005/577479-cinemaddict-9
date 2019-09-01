@@ -120,18 +120,14 @@ if (!FILMS.length) {
       const popupContainer = new PopupContainer();
       utils.render(document.querySelector(`body`), popupContainer.getElement(), `beforeend`);
 
-      const popupTopContainerElement = popupContainer._element.querySelector(`.form-details__top-container`);
-      const popupMiddleContainerElement = popupContainer._element.querySelector(`.form-details__middle-container`);
-      const popupBottomContainerElement = popupContainer._element.querySelector(`.form-details__bottom-container`);
-
       const popupTopContent = new PopupTopContent(FILMS[filmCardElement.id]);
-      utils.render(popupTopContainerElement, popupTopContent.getElement(), `beforeend`);
+      utils.render(popupContainer._element, popupTopContent.getElement(), `beforeend`);
 
       const popupUserRating = new PopupUserRating(FILMS[filmCardElement.id]);
-      utils.render(popupMiddleContainerElement, popupUserRating.getElement(), `beforeend`);
+      utils.render(popupContainer._element, popupUserRating.getElement(), `beforeend`);
 
       const popupComments = new PopupComments(FILMS[filmCardElement.id]);
-      utils.render(popupBottomContainerElement, popupComments.getElement(), `beforeend`);
+      utils.render(popupContainer._element, popupComments.getElement(), `beforeend`);
 
       const closeBtnElement = popupContainer._element.querySelector(`.film-details__close-btn`);
 

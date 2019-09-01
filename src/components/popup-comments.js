@@ -14,7 +14,8 @@ export default class PopupComments {
   }
 
   getTemplate() {
-    return `<section class="film-details__comments-wrap">
+    return `<div class="form-details__bottom-container">
+<section class="film-details__comments-wrap">
   <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${this._comments.length}</span></h3>
 
   <ul class="film-details__comments-list">
@@ -68,7 +69,8 @@ export default class PopupComments {
       </label>
     </div>
   </div>
-</section>`;
+</section>
+</div>`;
   }
 }
 

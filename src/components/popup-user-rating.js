@@ -18,7 +18,8 @@ export default class PopupUserRating {
   }
 
   getTemplate() {
-    return `<section class="film-details__user-rating-wrap">
+    return `<div class="form-details__middle-container">
+<section class="film-details__user-rating-wrap">
   <div class="film-details__user-rating-controls">
     <button class="film-details__watched-reset" type="button">Undo</button>
   </div>
@@ -42,6 +43,7 @@ export default class PopupUserRating {
       </div>
     </section>
   </div>
-</section>`;
+</section>
+</div>`;
   }
 }
