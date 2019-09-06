@@ -1,34 +1,16 @@
-import {utils} from "./utils.js";
+import Film from "./film.js";
 
-export default class PopupTopContent {
+export default class PopupTopContent extends Film {
   constructor(selectedFilm) {
-    this._title = selectedFilm.title;
+    super(selectedFilm);
     this._titleOriginal = selectedFilm.titleOriginal;
-    this._poster = selectedFilm.poster;
-    this._description = selectedFilm.description;
-    this._rating = selectedFilm.rating;
     this._yourRate = selectedFilm.yourRate;
     this._filmDirector = selectedFilm.filmDirector;
     this._writers = selectedFilm.writers;
     this._actors = selectedFilm.actors;
-    this._date = selectedFilm.date;
     this._country = selectedFilm.country;
-    this._duration = selectedFilm.duration;
-    this._genres = selectedFilm.genres;
     this._age = selectedFilm.age;
     this._isWatched = selectedFilm.isWatched;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = utils.createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 
   getTemplate() {
@@ -84,8 +66,7 @@ export default class PopupTopContent {
             <tr class="film-details__row">
               <td class="film-details__term">Genre${(this._genres.length > 1) ? `s` : ``}</td>
               <td class="film-details__cell">
-              ${this._genres.map((genre) => `
-                <span class="film-details__genre">${genre}</span>`).join(` `)}
+              ${this._genres.map((genre) => `<span class="film-details__genre">${genre}</span>`).join(` `)}
             </tr>
           </table>
 

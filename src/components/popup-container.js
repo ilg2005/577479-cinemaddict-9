@@ -1,18 +1,6 @@
-import {utils} from "./utils.js";
+import AbstractComponent from "./abstract-component";
 
-export default class PopupContainer {
-  getElement() {
-    if (!this._element) {
-      this._element = utils.createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
-  }
-
+export default class PopupContainer extends AbstractComponent {
   getTemplate() {
     return `<section class="film-details">
   <form class="film-details__inner" action="" method="get">

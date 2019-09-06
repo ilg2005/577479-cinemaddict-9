@@ -1,22 +1,6 @@
-import {utils} from "./utils.js";
+import Film from "./film.js";
 
-export default class PopupComments {
-  constructor(selectedFilm) {
-    this._comments = selectedFilm.comments;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = utils.createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
-  }
-
+export default class PopupComments extends Film {
   getTemplate() {
     return `<div class="form-details__bottom-container">
 <section class="film-details__comments-wrap">
