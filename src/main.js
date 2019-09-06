@@ -13,6 +13,7 @@ import PopupTopContent from "./components/popup-top-content.js";
 import PopupUserRating from "./components/popup-user-rating.js";
 import PopupComments from "./components/popup-comments.js";
 import NoMovies from "./components/no-movies";
+import PageController from "./components/page-controller";
 
 const headerElement = document.querySelector(`.header`);
 const mainElement = document.querySelector(`.main`);
@@ -44,40 +45,8 @@ if (!FILMS.length) {
   const showMoreBtn = new ShowMoreBtn();
   utils.render(filmsListElement, showMoreBtn.getElement(), `beforeend`);
 
-  const renderFilm = (filmCard) => {
-    const film = new Film(filmCard);
-
-    utils.render(allMoviesContainerElement, film.getElement(), `beforeend`);
-    film.getElement().id = filmCard.id;
-  };
-
-  const filmsLoaderElement = filmsListElement.querySelector(`.films-list__show-more`);
-
-  const renderFilmsPortion = (filmsArray, initialFilmsArrayLength) => {
-    let length = filmsArray.length > FILMS_PORTION_TO_RENDER ? FILMS_PORTION_TO_RENDER : filmsArray.length;
-    for (let i = 0; i < length; i++) {
-      renderFilm(filmsArray[i]);
-    }
-    const renderedFilmsCount = allMoviesContainerElement.querySelectorAll(`.film-card`).length;
-    if (renderedFilmsCount === initialFilmsArrayLength) {
-      filmsLoaderElement.classList.add(`hide`);
-      filmsLoaderElement.removeEventListener(`click`, filmsLoaderElementClickHandler);
-    }
-  };
-
-  const filmsLoaderElementClickHandler = () => {
-    let filmsCopy = FILMS.slice(0);
-    const renderedFilmsCount = allMoviesContainerElement.querySelectorAll(`.film-card`).length;
-    filmsCopy.splice(0, renderedFilmsCount);
-    renderFilmsPortion(filmsCopy, FILMS.length);
-  };
-
-  filmsLoaderElement.addEventListener(`click`, filmsLoaderElementClickHandler);
-
-  const FILMS_PORTION_TO_RENDER = 5;
-
-
-  renderFilmsPortion(FILMS, FILMS.length);
+  const pageController = new PageController(allMoviesContainerElement, FILMS);
+  pageController.init();
 
   const sortArrayByPropertyDescending = (array, property) => {
     array.sort((a, b) => a[property] < b[property] ? 1 : -1);
