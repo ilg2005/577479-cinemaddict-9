@@ -2,6 +2,7 @@ import {utils} from "./utils.js";
 import Film from "./film.js";
 import Sort from "./sort.js";
 import ShowMoreBtn from "./show-more-btn.js";
+import NoMovies from "./no-movies.js";
 
 export default class FilmsListController {
   constructor(allMoviesContainer, films) {
@@ -51,38 +52,43 @@ export default class FilmsListController {
   }
 
   init() {
-    utils.render(this._allMoviesContainer.parentElement, this._showMoreBtn.getElement(), `beforeend`);
-    this._renderFilms(this._allMoviesContainer, this._films);
-    const sortElement = this._sort.getElement();
-    utils.render(this._allMoviesContainer.parentElement, sortElement, `afterbegin`);
+    if (!this._films.length) {
+      const noMovies = new NoMovies();
+      utils.render(this._allMoviesContainer, noMovies.getElement(), `beforeend`);
+    } else {
+      utils.render(this._allMoviesContainer.parentElement, this._showMoreBtn.getElement(), `beforeend`);
+      this._renderFilms(this._allMoviesContainer, this._films);
+      const sortElement = this._sort.getElement();
+      utils.render(this._allMoviesContainer.parentElement, sortElement, `afterbegin`);
 
-    const sortElementClickHandler = (evt) => {
-      evt.preventDefault();
-      if (evt.target.tagName !== `A`) {
-        return;
-      }
+      const sortElementClickHandler = (evt) => {
+        evt.preventDefault();
+        if (evt.target.tagName !== `A`) {
+          return;
+        }
 
-      sortElement.querySelector(`.sort__button--active`).classList.remove(`sort__button--active`);
-      this._allMoviesContainer.innerHTML = ``;
+        sortElement.querySelector(`.sort__button--active`).classList.remove(`sort__button--active`);
+        this._allMoviesContainer.innerHTML = ``;
 
-      switch (evt.target.getAttribute(`data-sort`)) {
-        case `date`:
-          evt.target.classList.add(`sort__button--active`);
-          const filmsByDate = this._films.slice().sort((a, b) => b.dateInTimestamp - a.dateInTimestamp);
-          this._renderFilms(this._allMoviesContainer, filmsByDate);
-          break;
-        case `rating`:
-          evt.target.classList.add(`sort__button--active`);
-          const filmsByRating = this._films.slice().sort((a, b) => b.rating - a.rating);
-          this._renderFilms(this._allMoviesContainer, filmsByRating);
-          break;
-        case `default`:
-          evt.target.classList.add(`sort__button--active`);
-          this._renderFilms(this._allMoviesContainer, this._films);
-          break;
-      }
-    };
+        switch (evt.target.getAttribute(`data-sort`)) {
+          case `date`:
+            evt.target.classList.add(`sort__button--active`);
+            const filmsByDate = this._films.slice().sort((a, b) => b.dateInTimestamp - a.dateInTimestamp);
+            this._renderFilms(this._allMoviesContainer, filmsByDate);
+            break;
+          case `rating`:
+            evt.target.classList.add(`sort__button--active`);
+            const filmsByRating = this._films.slice().sort((a, b) => b.rating - a.rating);
+            this._renderFilms(this._allMoviesContainer, filmsByRating);
+            break;
+          case `default`:
+            evt.target.classList.add(`sort__button--active`);
+            this._renderFilms(this._allMoviesContainer, this._films);
+            break;
+        }
+      };
 
-    sortElement.addEventListener(`click`, sortElementClickHandler);
+      sortElement.addEventListener(`click`, sortElementClickHandler);
+    }
   }
 }
