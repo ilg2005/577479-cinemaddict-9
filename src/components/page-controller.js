@@ -30,6 +30,8 @@ export default class PageController {
       if (renderedFilmsCount === initialFilmsArrayLength) {
         filmsLoaderElement.classList.add(`hide`);
         filmsLoaderElement.removeEventListener(`click`, filmsLoaderElementClickHandler);
+      } else {
+        filmsLoaderElement.classList.remove(`hide`);
       }
     };
 
@@ -60,7 +62,6 @@ export default class PageController {
         return;
       }
 
-      this._showMoreBtn.getElement().classList.remove(`hide`);
       sortElement.querySelector(`.sort__button--active`).classList.remove(`sort__button--active`);
       this._allMoviesContainer.innerHTML = ``;
 
