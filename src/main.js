@@ -3,10 +3,8 @@ import {utils} from "./components/utils.js";
 import Search from "./components/search.js";
 import User from "./components/user.js";
 import Filters from "./components/filters.js";
-import Sort from "./components/sort.js";
 import ContentContainer from "./components/content-container.js";
 import Film from "./components/film.js";
-import ShowMoreBtn from "./components/show-more-btn.js";
 import Footer from "./components/footer.js";
 import PopupContainer from "./components/popup-container.js";
 import PopupTopContent from "./components/popup-top-content.js";
@@ -28,9 +26,6 @@ utils.render(headerElement, user.getElement(), `beforeend`);
 const filters = new Filters(FILMS);
 utils.render(mainElement, filters.getElement(), `beforeend`);
 
-const sort = new Sort();
-utils.render(mainElement, sort.getElement(), `beforeend`);
-
 const contentContainer = new ContentContainer();
 utils.render(mainElement, contentContainer.getElement(), `beforeend`);
 
@@ -42,9 +37,6 @@ if (!FILMS.length) {
   const noMovies = new NoMovies();
   utils.render(allMoviesContainerElement, noMovies.getElement(), `beforeend`);
 } else {
-  const showMoreBtn = new ShowMoreBtn();
-  utils.render(filmsListElement, showMoreBtn.getElement(), `beforeend`);
-
   const pageController = new PageController(allMoviesContainerElement, FILMS);
   pageController.init();
 

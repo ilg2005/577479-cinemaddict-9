@@ -11,6 +11,7 @@ export default class Film extends AbstractComponent {
     this._duration = filmCard.duration;
     this._genres = filmCard.genres;
     this._comments = filmCard.comments;
+    this._dateInTimestamp = filmCard._dateInTimestamp;
   }
 
   getShortenedDescription(text = ``) {

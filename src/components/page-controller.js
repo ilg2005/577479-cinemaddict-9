@@ -1,17 +1,21 @@
-import Film from "./film.js";
 import {utils} from "./utils.js";
+import Film from "./film.js";
+import Sort from "./sort.js";
+import ShowMoreBtn from "./show-more-btn.js";
 
 export default class PageController {
   constructor(allMoviesContainer, films) {
     this._allMoviesContainer = allMoviesContainer;
     this._films = films;
+    this._sort = new Sort();
+    this._showMoreBtn = new ShowMoreBtn();
   }
 
-  init() {
+  _renderFilms(container, films) {
     const renderFilm = (filmCard) => {
       const film = new Film(filmCard);
 
-      utils.render(this._allMoviesContainer, film.getElement(), `beforeend`);
+      utils.render(container, film.getElement(), `beforeend`);
       film.getElement().id = filmCard.id;
     };
 
@@ -22,7 +26,7 @@ export default class PageController {
       for (let i = 0; i < length; i++) {
         renderFilm(filmsArray[i]);
       }
-      const renderedFilmsCount = this._allMoviesContainer.querySelectorAll(`.film-card`).length;
+      const renderedFilmsCount = container.querySelectorAll(`.film-card`).length;
       if (renderedFilmsCount === initialFilmsArrayLength) {
         filmsLoaderElement.classList.add(`hide`);
         filmsLoaderElement.removeEventListener(`click`, filmsLoaderElementClickHandler);
@@ -30,10 +34,10 @@ export default class PageController {
     };
 
     const filmsLoaderElementClickHandler = () => {
-      let filmsCopy = this._films.slice(0);
-      const renderedFilmsCount = this._allMoviesContainer.querySelectorAll(`.film-card`).length;
+      let filmsCopy = films.slice();
+      const renderedFilmsCount = container.querySelectorAll(`.film-card`).length;
       filmsCopy.splice(0, renderedFilmsCount);
-      renderFilmsPortion(filmsCopy, this._films.length);
+      renderFilmsPortion(filmsCopy, films.length);
     };
 
     filmsLoaderElement.addEventListener(`click`, filmsLoaderElementClickHandler);
@@ -41,6 +45,43 @@ export default class PageController {
     const FILMS_PORTION_TO_RENDER = 5;
 
 
-    renderFilmsPortion(this._films, this._films.length);
+    renderFilmsPortion(films, films.length);
+  }
+
+  init() {
+    utils.render(this._allMoviesContainer.parentElement, this._showMoreBtn.getElement(), `beforeend`);
+    this._renderFilms(this._allMoviesContainer, this._films);
+    const sortElement = this._sort.getElement();
+    utils.render(this._allMoviesContainer.parentElement, sortElement, `afterbegin`);
+
+    const sortElementClickHandler = (evt) => {
+      evt.preventDefault();
+      if (evt.target.tagName !== `A`) {
+        return;
+      }
+
+      this._showMoreBtn.getElement().classList.remove(`hide`);
+      sortElement.querySelector(`.sort__button--active`).classList.remove(`sort__button--active`);
+      this._allMoviesContainer.innerHTML = ``;
+
+      switch (evt.target.getAttribute(`data-sort`)) {
+        case `date`:
+          evt.target.classList.add(`sort__button--active`);
+          const filmsByDate = this._films.slice().sort((a, b) => b.dateInTimestamp - a.dateInTimestamp);
+          this._renderFilms(this._allMoviesContainer, filmsByDate);
+          break;
+        case `rating`:
+          evt.target.classList.add(`sort__button--active`);
+          const filmsByRating = this._films.slice().sort((a, b) => b.rating - a.rating);
+          this._renderFilms(this._allMoviesContainer, filmsByRating);
+          break;
+        case `default`:
+          evt.target.classList.add(`sort__button--active`);
+          this._renderFilms(this._allMoviesContainer, this._films);
+          break;
+      }
+    };
+
+    sortElement.addEventListener(`click`, sortElementClickHandler);
   }
 }
