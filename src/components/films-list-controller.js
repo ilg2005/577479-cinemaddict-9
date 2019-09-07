@@ -5,8 +5,9 @@ import ShowMoreBtn from "./show-more-btn.js";
 import NoMovies from "./no-movies.js";
 
 export default class FilmsListController {
-  constructor(allMoviesContainer, films) {
-    this._allMoviesContainer = allMoviesContainer;
+  constructor(filmsListElement, films) {
+    this._filmsListElement = filmsListElement;
+    this._allMoviesContainer = this._filmsListElement.querySelector(`.all-movies`);
     this._films = films;
     this._sort = new Sort();
     this._showMoreBtn = new ShowMoreBtn();

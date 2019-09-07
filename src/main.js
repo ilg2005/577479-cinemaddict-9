@@ -30,10 +30,8 @@ utils.render(mainElement, contentContainer.getElement(), `beforeend`);
 
 const filmsSectionElement = mainElement.querySelector(`.films`);
 const filmsListElement = filmsSectionElement.querySelector(`.films-list`);
-const allMoviesContainerElement = filmsListElement.querySelector(`.all-movies`);
 
-
-const filmsListController = new FilmsListController(allMoviesContainerElement, FILMS);
+const filmsListController = new FilmsListController(filmsListElement, FILMS);
 filmsListController.init();
 
 const sortArrayByPropertyDescending = (array, property) => {
