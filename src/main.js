@@ -11,7 +11,7 @@ import PopupTopContent from "./components/popup-top-content.js";
 import PopupUserRating from "./components/popup-user-rating.js";
 import PopupComments from "./components/popup-comments.js";
 import NoMovies from "./components/no-movies";
-import PageController from "./components/page-controller";
+import FilmsListController from "./components/films-list-controller";
 
 const headerElement = document.querySelector(`.header`);
 const mainElement = document.querySelector(`.main`);
@@ -37,7 +37,7 @@ if (!FILMS.length) {
   const noMovies = new NoMovies();
   utils.render(allMoviesContainerElement, noMovies.getElement(), `beforeend`);
 } else {
-  const pageController = new PageController(allMoviesContainerElement, FILMS);
+  const pageController = new FilmsListController(allMoviesContainerElement, FILMS);
   pageController.init();
 
   const sortArrayByPropertyDescending = (array, property) => {

@@ -3,7 +3,7 @@ import Film from "./film.js";
 import Sort from "./sort.js";
 import ShowMoreBtn from "./show-more-btn.js";
 
-export default class PageController {
+export default class FilmsListController {
   constructor(allMoviesContainer, films) {
     this._allMoviesContainer = allMoviesContainer;
     this._films = films;
