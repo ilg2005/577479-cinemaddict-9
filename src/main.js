@@ -37,8 +37,8 @@ if (!FILMS.length) {
   const noMovies = new NoMovies();
   utils.render(allMoviesContainerElement, noMovies.getElement(), `beforeend`);
 } else {
-  const pageController = new FilmsListController(allMoviesContainerElement, FILMS);
-  pageController.init();
+  const filmsListController = new FilmsListController(allMoviesContainerElement, FILMS);
+  filmsListController.init();
 
   const sortArrayByPropertyDescending = (array, property) => {
     array.sort((a, b) => a[property] < b[property] ? 1 : -1);
