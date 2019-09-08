@@ -42,8 +42,7 @@ export default class FilmsListController {
         const showMoreBtnElementClickHandler = () => {
           this._restFilms = this._renderFilmsPortion(this._restFilms);
           if (!this._restFilms.length) {
-            showMoreBtnElement.removeEventListener(`click`, showMoreBtnElementClickHandler);
-            utils.unrender(showMoreBtnElement);
+            showMoreBtnElement.classList.add(`hide`);
           }
         };
         showMoreBtnElement.addEventListener(`click`, showMoreBtnElementClickHandler);
@@ -52,7 +51,7 @@ export default class FilmsListController {
 
       const sortElement = this._sort.getElement();
       utils.render(this._filmsListElement, sortElement, `afterbegin`);
-      /*
+
       const sortElementClickHandler = (evt) => {
         evt.preventDefault();
         if (evt.target.tagName !== `A`) {
@@ -62,26 +61,27 @@ export default class FilmsListController {
         sortElement.querySelector(`.sort__button--active`).classList.remove(`sort__button--active`);
         this._allMoviesContainer.innerHTML = ``;
 
+        this._showMoreBtn.getElement().classList.remove(`hide`);
         switch (evt.target.getAttribute(`data-sort`)) {
           case `date`:
             evt.target.classList.add(`sort__button--active`);
             const filmsByDate = this._films.slice().sort((a, b) => b.dateInTimestamp - a.dateInTimestamp);
-            this._renderFilmsPortion(filmsByDate);
+            this._restFilms = this._renderFilmsPortion(filmsByDate);
             break;
           case `rating`:
             evt.target.classList.add(`sort__button--active`);
             const filmsByRating = this._films.slice().sort((a, b) => b.rating - a.rating);
-            this._renderFilmsPortion(filmsByRating);
+            this._restFilms = this._renderFilmsPortion(filmsByRating);
             break;
           case `default`:
             evt.target.classList.add(`sort__button--active`);
-            this._renderFilmsPortion(this._films);
+            this._restFilms = this._renderFilmsPortion(this._films);
             break;
         }
       };
 
       sortElement.addEventListener(`click`, sortElementClickHandler);
-*/
+
     }
   }
 }
