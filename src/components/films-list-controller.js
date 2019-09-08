@@ -29,6 +29,41 @@ export default class FilmsListController {
     return filmsArrayClone;
   }
 
+  _implementSorting() {
+    const sortElement = this._sort.getElement();
+    utils.render(this._filmsListElement, sortElement, `afterbegin`);
+
+    const sortElementClickHandler = (evt) => {
+      evt.preventDefault();
+      if (evt.target.tagName !== `A`) {
+        return;
+      }
+
+      sortElement.querySelector(`.sort__button--active`).classList.remove(`sort__button--active`);
+      this._allMoviesContainer.innerHTML = ``;
+
+      this._showMoreBtn.getElement().classList.remove(`hide`);
+      switch (evt.target.getAttribute(`data-sort`)) {
+        case `date`:
+          evt.target.classList.add(`sort__button--active`);
+          const filmsByDate = this._films.slice().sort((a, b) => b.dateInTimestamp - a.dateInTimestamp);
+          this._restFilms = this._renderFilmsPortion(filmsByDate);
+          break;
+        case `rating`:
+          evt.target.classList.add(`sort__button--active`);
+          const filmsByRating = this._films.slice().sort((a, b) => b.rating - a.rating);
+          this._restFilms = this._renderFilmsPortion(filmsByRating);
+          break;
+        case `default`:
+          evt.target.classList.add(`sort__button--active`);
+          this._restFilms = this._renderFilmsPortion(this._films);
+          break;
+      }
+    };
+
+    sortElement.addEventListener(`click`, sortElementClickHandler);
+  }
+
   init() {
     if (!this._films.length) {
       const noMovies = new NoMovies();
@@ -48,40 +83,7 @@ export default class FilmsListController {
         showMoreBtnElement.addEventListener(`click`, showMoreBtnElementClickHandler);
       }
 
-
-      const sortElement = this._sort.getElement();
-      utils.render(this._filmsListElement, sortElement, `afterbegin`);
-
-      const sortElementClickHandler = (evt) => {
-        evt.preventDefault();
-        if (evt.target.tagName !== `A`) {
-          return;
-        }
-
-        sortElement.querySelector(`.sort__button--active`).classList.remove(`sort__button--active`);
-        this._allMoviesContainer.innerHTML = ``;
-
-        this._showMoreBtn.getElement().classList.remove(`hide`);
-        switch (evt.target.getAttribute(`data-sort`)) {
-          case `date`:
-            evt.target.classList.add(`sort__button--active`);
-            const filmsByDate = this._films.slice().sort((a, b) => b.dateInTimestamp - a.dateInTimestamp);
-            this._restFilms = this._renderFilmsPortion(filmsByDate);
-            break;
-          case `rating`:
-            evt.target.classList.add(`sort__button--active`);
-            const filmsByRating = this._films.slice().sort((a, b) => b.rating - a.rating);
-            this._restFilms = this._renderFilmsPortion(filmsByRating);
-            break;
-          case `default`:
-            evt.target.classList.add(`sort__button--active`);
-            this._restFilms = this._renderFilmsPortion(this._films);
-            break;
-        }
-      };
-
-      sortElement.addEventListener(`click`, sortElementClickHandler);
-
+      this._implementSorting();
     }
   }
 }
