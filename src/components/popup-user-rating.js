@@ -1,24 +1,10 @@
-import {utils} from "./utils.js";
+import Film from "./film.js";
 
-export default class PopupUserRating {
+export default class PopupUserRating extends Film {
   constructor(selectedFilm) {
+    super(selectedFilm);
     this._MAX_RATING = 9;
-    this._title = selectedFilm.title;
-    this._titleOriginal = selectedFilm.titleOriginal;
-    this._poster = selectedFilm.poster;
     this._yourRate = selectedFilm.yourRate;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = utils.createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 
   getTemplate() {

@@ -1,7 +1,8 @@
-import {utils} from "./utils";
+import AbstractComponent from "./abstract-component";
 
-export default class User {
+export default class User extends AbstractComponent {
   constructor(watchedFilmsNumber = 0) {
+    super();
     this._filmsWatched = watchedFilmsNumber;
   }
 
@@ -15,18 +16,6 @@ export default class User {
       userTitle = `Movie Buff`;
     }
     return userTitle;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = utils.createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 
   getTemplate() {

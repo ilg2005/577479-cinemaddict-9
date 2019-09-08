@@ -1,5 +1,5 @@
 export const FILMS = [];
-const FILMS_COUNT = 18;
+const FILMS_COUNT = 13;
 
 const BEST_MOVIES_2018 = [`Mandy`, `Annihilation`, `Love After Love`, `The Rider`, `Cold War`, `You Were Never Really Here`, `First Reformed`, `Zama`, `Eighth Grade`, `Thunder Road`, `A Private War`, `Shoplifters`, `24 Frames`, `The Ballad of Buster Scruggs`, `Filmworker`];
 
@@ -98,6 +98,7 @@ const getFilmsData = (filmsArray, filmsCount) => {
   for (let i = 0; i < filmsCount; i++) {
     filmsArray.push(getFilm());
     filmsArray[i].id = i;
+    filmsArray[i].dateInTimestamp = Date.parse(filmsArray[i].date);
   }
 };
 
