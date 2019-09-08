@@ -1,18 +1,6 @@
-import {utils} from "./utils.js";
+import AbstractComponent from "./abstract-component.js";
 
-export default class ContentContainer {
-  getElement() {
-    if (!this._element) {
-      this._element = utils.createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
-  }
-
+export default class ContentContainer extends AbstractComponent {
   getTemplate() {
     return `<section class="films">
     <section class="films-list">
